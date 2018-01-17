@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.admin.rcadmin.EnquiryActivity"
+    android:orientation="vertical"
+    android:background="@color/colorGray">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_enquiry"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"/>
+
+    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Enqury"
+        android:layout_margin="16dp"
+        android:textSize="16dp"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"/>
+    <ListView
+        android:id="@+id/list_customers"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="#f4f4f4"
+        android:dividerHeight="10dp"
+        android:background="@color/colorGray"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:scrollbars="none"/>
+</LinearLayout>

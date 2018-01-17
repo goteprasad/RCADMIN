@@ -49,7 +49,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_user"
+                    android:src="@drawable/ic_person_black_24dp"
                     android:layout_gravity="center_vertical"
                     android:paddingRight="10dp"/>
 
@@ -77,7 +77,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_lock"
+                    android:src="@drawable/ic_lock_open_black_24dp"
                     android:layout_gravity="center_vertical"
                     android:paddingRight="10dp"/>
 
@@ -99,6 +99,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/loginbtn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
