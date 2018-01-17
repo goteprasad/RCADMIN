@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite">
+            <View
+                android:layout_width="20px"
+                android:layout_height="match_parent"
+                android:background="@color/colorDarkgray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+                <ImageView
+                    android:id="@+id/customer_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="16dp">
+                    <TextView
+                        android:id="@+id/customer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="@color/colorBlack"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/customer_mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mobile Number"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:id="@+id/customer_village"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Village"/>
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/customer_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+</LinearLayout>
