@@ -49,7 +49,7 @@ public class Enquiry implements Parcelable{
     private String imagepath;
 
 
-public static final  String  NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMPLITED="C",FIRE="F";
+public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMPLITED="C",FIRE="F";
 
     public Enquiry() {
     }

@@ -2,11 +2,13 @@ package com.example.admin.rcadmin.enquiry;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +29,32 @@ public class EnquiryFragment extends Fragment {
     private ArrayList<Enquiry> enquiryArrayList;
     private SweetAlertDialog sweetAlertDialog;
 
+
     String  enquiryType=Enquiry.NEW;
+
+
+    private Enquiry enquiry;
+    public static EnquiryFragment getInstance(Enquiry enquiry)
+    {
+        EnquiryFragment fragment = new EnquiryFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("Enquiry" , enquiry);
+        fragment.setArguments(args);
+        return fragment;
+
+    }
 
     public void setEnquiryType(String enquiryType)
     {
         this.enquiryType=enquiryType;
-        setEnquiryArrayList();
-        getEnquiryListFromServer();
+    }
+
+
+    @Override
+    public void onViewCreated(View view,  Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        getActivity().setTitle("New Enquiry");
     }
 
     public EnquiryFragment() {
@@ -49,11 +70,21 @@ public class EnquiryFragment extends Fragment {
         initiaizations(view);
         setEnquiryArrayList();
 
+       /* newEnquiry_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
+
+*/
         return view;
     }
 
     private void initiaizations(View view)
     {
+        //((AppCompatActivity)getActivity()).setSupportActionBar(newEnquiry_toolbar);
+       // newEnquiry_toolbar=(Toolbar)view.findViewById(R.id.newEnquiryToolbar);
         list_CustomersRecyclerView=(RecyclerView)view.findViewById(R.id.listCustomers);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list_CustomersRecyclerView.setLayoutManager(layoutManager);
@@ -77,6 +108,7 @@ public class EnquiryFragment extends Fragment {
                 sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                 sweetAlertDialog.setTitleText(message);
                 sweetAlertDialog.setConfirmText("Ok");
+                sweetAlertDialog.dismissWithAnimation();
                 sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -100,15 +132,14 @@ public class EnquiryFragment extends Fragment {
 
             }
         });
-
     }
 
     private  void setEnquiryArrayList()
     {
         enquiryArrayList=new ArrayList<Enquiry>();
+        getEnquiryListFromServer();
         enquiryListAdapter = new EnquiryListAdapter(getContext(),enquiryArrayList);
         list_CustomersRecyclerView.setAdapter(enquiryListAdapter);
-
     }
 
 }

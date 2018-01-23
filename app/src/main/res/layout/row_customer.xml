@@ -43,6 +43,7 @@
                         android:text="Village"/>
                 </LinearLayout>
                 <TextView
+                    android:textColor="@color/colorBlack"
                     android:id="@+id/customer_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

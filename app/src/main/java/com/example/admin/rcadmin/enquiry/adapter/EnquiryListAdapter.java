@@ -2,6 +2,7 @@ package com.example.admin.rcadmin.enquiry.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.admin.rcadmin.R;
+import com.example.admin.rcadmin.activity.MainActivity;
 import com.example.admin.rcadmin.enquiry.EnquiryDetailsFragment;
 import com.example.admin.rcadmin.enquiry.model.Enquiry;
 
@@ -23,6 +25,8 @@ public class EnquiryListAdapter extends RecyclerView.Adapter<EnquiryListAdapter.
     private Context context;
     private ArrayList<Enquiry> enquiryArrayList;
     FragmentTransaction fragmentTransaction;
+    Enquiry enquiry;
+
 
     public EnquiryListAdapter(Context context,ArrayList<Enquiry> enquiryArrayList) {
         this.context = context;
@@ -34,24 +38,33 @@ public class EnquiryListAdapter extends RecyclerView.Adapter<EnquiryListAdapter.
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_customer, viewGroup, false);
         EnquiryListAdapter.ViewHolder viewHolder = new EnquiryListAdapter.ViewHolder(view);
         context = viewGroup.getContext();
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(EnquiryListAdapter.ViewHolder holder, int position) {
         final Enquiry enquiry = enquiryArrayList.get(position);
+
         holder.customerName.setText(String.valueOf(enquiry.getName() + ""));
         holder.customerMobile.setText(String.valueOf(enquiry.getMobile() + ""));
         holder.customerVillage.setText("Village Name");
-        holder.customerAge.setText(String.valueOf(enquiry.getAge()+ ""));
+        holder.customerAge.setText(String.valueOf("Age: "+enquiry.getAge()+ ""));
+
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /*Intent intent=new Intent(context, MainActivity.class);
+                intent.putExtra("Enquiry",enquiry);
+                context.startActivity(intent);
+*/
                 fragmentTransaction =((AppCompatActivity)context).getSupportFragmentManager().beginTransaction();
                 EnquiryDetailsFragment enquiryDetailsFragment =EnquiryDetailsFragment.getInstance(enquiry);
-                fragmentTransaction.replace(R.id.frameLayout, enquiryDetailsFragment).commit();
+                fragmentTransaction.replace(R.id.frameLayout, enquiryDetailsFragment).addToBackStack(null).commit();
+
 
             }
         });

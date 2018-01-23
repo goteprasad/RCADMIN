@@ -164,6 +164,10 @@ public class Admin_WebApiHelper {
                 {
                     params.put("state", enquirType);
                 }
+                else
+                {
+                    params.put("state","");
+                }
                 return params;
             }
 

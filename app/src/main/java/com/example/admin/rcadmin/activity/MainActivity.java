@@ -3,6 +3,7 @@ package com.example.admin.rcadmin.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,17 +24,18 @@ public class MainActivity extends AppCompatActivity
     private PrefManager prefManager;
     FragmentTransaction fragmentTransaction;
     EnquiryFragment enquiryFragment;
+    Enquiry enquiry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        enquiry=getIntent().getParcelableExtra("");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         prefManager=new PrefManager(getApplicationContext());
-        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        enquiryFragment = new EnquiryFragment();
-        fragmentTransaction.replace(R.id.frameLayout, enquiryFragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        displaySelectedScreen(R.id.new_enquiry);
+
     }
 
     @Override
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+
         } else {
             super.onBackPressed();
         }
@@ -59,34 +64,80 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle navigation view item clicks here.\
+        /*fragmentTransaction = getSupportFragmentManager().beginTransaction();
         int id = item.getItemId();
 
-        if (id == R.id.new_enq) {
-            enquiryTransaction(Enquiry.NEW);
-
-        } else if (id == R.id.material_sent) {
-            enquiryTransaction(Enquiry.MATERIALSEND);
-        } else if (id == R.id.construction_complete) {
-            enquiryTransaction(Enquiry.CONSTRUCTION_COMPLITED);
-        } else if (id == R.id.team_list) {
-            enquiryTransaction(Enquiry.NEW);
-        } else if (id == R.id.add_team) {
-        } else if (id == R.id.setting) {
-
-
-        } else if (id == R.id.about_help) {
-
-        } else if (id == R.id.logout) {
-            prefManager.setLogOut();
-            Intent i= new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
+        if (id == R.id.new_enquiry) {
+            //enquiryTransaction(Enquiry.NEW);
+            //enquiryFragment = new EnquiryFragment();
+            //fragmentTransaction.replace(R.id.frameLayout, enquiryFragment).commit();
         }
+        else if (id == R.id.material_sent) {
+            //enquiryTransaction(Enquiry.MATERIALSEND);
+        }
+        else if (id == R.id.construction_complete) {
+            //enquiryTransaction(Enquiry.CONSTRUCTION_COMPLITED);
+        }
+        else if (id == R.id.team_list) {
+            //enquiryTransaction(Enquiry.NEW);
+        }
+        else if (id == R.id.add_team) {
+        }
+        else if (id == R.id.setting) {
+        }
+        else if (id == R.id.about_help) {
+
+        }
+        else if (id == R.id.logout) {
+
+        }
+*/
+        int id = item.getItemId();
+        displaySelectedScreen(id);
+
+        return true;
+    }
+
+
+    private void displaySelectedScreen(int itemId) {
+
+        Fragment fragment = null;
+
+        switch (itemId) {
+            case R.id.new_enquiry:
+                enquiryTransaction(Enquiry.NEW);
+                break;
+
+            case R.id.material_sent:
+                enquiryTransaction(Enquiry.MATERIALSEND);
+                break;
+
+            case R.id.construction_complete:
+                enquiryTransaction(Enquiry.CONSTRUCTION_COMPLITED);
+                break;
+
+            case R.id.logout:
+                prefManager.setLogOut();
+                Intent i= new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
+                break;
+
+            default:
+                break;
+        }
+
+        /*//replacing the fragment
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameLayout, fragment);
+            ft.commit();
+        }
+*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     void enquiryTransaction(String type)
