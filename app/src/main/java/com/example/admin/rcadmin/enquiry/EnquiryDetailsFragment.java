@@ -124,9 +124,11 @@ public class EnquiryDetailsFragment extends Fragment {
                 .error(R.drawable.plannedarea)
                 .into(place_image);
 
+
+
         if(enquiry.getState().equalsIgnoreCase(Enquiry.CONSTRUCTION_COMPLITED))
         {
-            
+
         }
     }
 }

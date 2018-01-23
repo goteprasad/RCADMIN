@@ -8,10 +8,6 @@ import com.example.admin.rcadmin.enquiry.listener.Enquiry_Listener;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Nikam on 19/01/2018.
- */
-
 public class Enquiry implements Parcelable{
     private String id;
     private String kitchen_id;
