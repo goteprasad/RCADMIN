@@ -5,10 +5,11 @@ import android.os.Parcelable;
 
 import com.example.admin.rcadmin.enquiry.listener.Enquiry_Listener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Enquiry implements Parcelable{
+public class Enquiry implements Parcelable,Serializable {
     private String id;
     private String kitchen_id;
     private String roofType;

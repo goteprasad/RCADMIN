@@ -4,6 +4,15 @@
     package="com.example.admin.rcadmin">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
     <application
         android:name=".app.MyApplication"
@@ -28,6 +37,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" />
         <activity android:name=".user_login.LoginActivity"></activity>
+        <activity android:name=".scanner.AdharScanner"></activity>
     </application>
 
 </manifest>

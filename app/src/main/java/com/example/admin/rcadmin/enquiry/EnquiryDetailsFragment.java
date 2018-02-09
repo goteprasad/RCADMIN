@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
-import com.example.admin.rcadmin.AdapterConstructionTeam;
-import com.example.admin.rcadmin.ModelConstructionTeam;
+
 import com.example.admin.rcadmin.R;
+import com.example.admin.rcadmin.construction_team.AdapterConstructionTeam;
+import com.example.admin.rcadmin.construction_team.ModelConstructionTeam;
 import com.example.admin.rcadmin.enquiry.model.Enquiry;
 
 

@@ -1,4 +1,4 @@
-package com.example.admin.rcadmin;
+package com.example.admin.rcadmin.construction_team;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.admin.rcadmin.R;
 
 import java.util.ArrayList;
 

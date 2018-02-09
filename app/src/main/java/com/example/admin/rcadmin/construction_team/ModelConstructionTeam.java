@@ -1,4 +1,4 @@
-package com.example.admin.rcadmin;
+package com.example.admin.rcadmin.construction_team;
 
 
 public class ModelConstructionTeam {
@@ -9,6 +9,7 @@ public class ModelConstructionTeam {
         this.name = name;
         this.image=image;
     }
+
     public String getName() {
         return name;
     }

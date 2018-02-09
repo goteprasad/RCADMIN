@@ -39,9 +39,7 @@ public class Admin_WebApiHelper {
             @Override
             public void onResponse(String apiresult)
             {
-
                 try {
-
                     JSONObject response = new JSONObject(apiresult);
                     String message=response.getString("message");
 
