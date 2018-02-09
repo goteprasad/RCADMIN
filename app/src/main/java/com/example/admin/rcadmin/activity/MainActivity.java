@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.admin.rcadmin.R;
+import com.example.admin.rcadmin.construction_team.ConstructionTeamRegistrationFragment;
 import com.example.admin.rcadmin.enquiry.EnquiryFragment;
 import com.example.admin.rcadmin.enquiry.model.Enquiry;
 import com.example.admin.rcadmin.pref_manager.PrefManager;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity
     FragmentTransaction fragmentTransaction;
     EnquiryFragment enquiryFragment;
     Enquiry enquiry;
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +49,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         displaySelectedScreen(R.id.new_enquiry);
 
-    }
 
+
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -106,15 +109,26 @@ public class MainActivity extends AppCompatActivity
 
         switch (itemId) {
             case R.id.new_enquiry:
+                title = getString(R.string.new_enquiry);
                 enquiryTransaction(Enquiry.NEW);
                 break;
 
             case R.id.material_sent:
+                title = getString(R.string.material_sent);
                 enquiryTransaction(Enquiry.MATERIALSEND);
                 break;
 
             case R.id.construction_complete:
+                title = getString(R.string.complete_construction);
                 enquiryTransaction(Enquiry.CONSTRUCTION_COMPLITED);
+                break;
+
+
+            case R.id.add_team:
+                title = getString(R.string.member_information);
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                ConstructionTeamRegistrationFragment constructionTeamRegistrationFragment = new ConstructionTeamRegistrationFragment();
+                fragmentTransaction.replace(R.id.frameLayout, constructionTeamRegistrationFragment).commit();
                 break;
 
             case R.id.logout:
@@ -128,6 +142,7 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
+        setTitle();
         /*//replacing the fragment
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -147,5 +162,9 @@ public class MainActivity extends AppCompatActivity
         enquiryFragment = new EnquiryFragment();
         fragmentTransaction.replace(R.id.frameLayout, enquiryFragment).commit();
         enquiryFragment.setEnquiryType(type);
+    }
+
+    private void setTitle() {
+        getSupportActionBar().setTitle(title);
     }
 }

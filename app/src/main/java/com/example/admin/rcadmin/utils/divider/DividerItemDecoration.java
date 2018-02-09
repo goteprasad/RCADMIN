@@ -1,4 +1,4 @@
-package com.example.admin.rcadmin.utils;
+package com.example.admin.rcadmin.utils.divider;
 
 import android.content.Context;
 import android.content.res.Resources;

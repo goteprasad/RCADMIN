@@ -1,6 +1,7 @@
 package com.example.admin.rcadmin.enquiry;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -29,11 +30,14 @@ public class EnquiryFragment extends Fragment {
     private ArrayList<Enquiry> enquiryArrayList;
     private SweetAlertDialog sweetAlertDialog;
 
+    protected Handler handler;
 
     String  enquiryType=Enquiry.NEW;
 
 
+
     private Enquiry enquiry;
+
     public static EnquiryFragment getInstance(Enquiry enquiry)
     {
         EnquiryFragment fragment = new EnquiryFragment();
@@ -46,6 +50,7 @@ public class EnquiryFragment extends Fragment {
 
     public void setEnquiryType(String enquiryType)
     {
+
         this.enquiryType=enquiryType;
     }
 
@@ -67,24 +72,17 @@ public class EnquiryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_enquiry, container, false);
 
-        initiaizations(view);
+        initializations(view);
         setEnquiryArrayList();
 
-       /* newEnquiry_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
-
-*/
         return view;
     }
 
-    private void initiaizations(View view)
+    private void initializations(View view)
     {
         //((AppCompatActivity)getActivity()).setSupportActionBar(newEnquiry_toolbar);
        // newEnquiry_toolbar=(Toolbar)view.findViewById(R.id.newEnquiryToolbar);
+        handler = new Handler();
         list_CustomersRecyclerView=(RecyclerView)view.findViewById(R.id.listCustomers);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list_CustomersRecyclerView.setLayoutManager(layoutManager);
@@ -138,8 +136,10 @@ public class EnquiryFragment extends Fragment {
     {
         enquiryArrayList=new ArrayList<Enquiry>();
         getEnquiryListFromServer();
-        enquiryListAdapter = new EnquiryListAdapter(getContext(),enquiryArrayList);
+        enquiryListAdapter = new EnquiryListAdapter(getContext(),enquiryArrayList,list_CustomersRecyclerView);
         list_CustomersRecyclerView.setAdapter(enquiryListAdapter);
+
     }
+
 
 }
