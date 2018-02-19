@@ -2,14 +2,12 @@ package com.example.admin.rcadmin.enquiry.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.example.admin.rcadmin.enquiry.listener.Enquiry_Listener;
+import android.support.v7.widget.RecyclerView;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Enquiry implements Parcelable,Serializable {
+public class Enquiry implements Parcelable {
+    private String cityname;
     private String id;
     private String kitchen_id;
     private String roofType;
@@ -44,6 +42,7 @@ public class Enquiry implements Parcelable,Serializable {
     private String updateDate;
     private String addedby_id;
     private String imagepath;
+    private String villagename;
 
 
 public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMPLITED="C",FIRE="F";
@@ -52,6 +51,8 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
     }
 
     public Enquiry(Parcel in) {
+        cityname = in.readString();
+        villagename = in.readString();
         id = in.readString();
         kitchen_id = in.readString();
         roofType = in.readString();
@@ -81,11 +82,13 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
         mobile = in.readString();
         villageid = in.readString();
         citi_id = in.readString();
+        added_date=in.readString();
         added_date = in.readString();
         uploaddate = in.readString();
         updateDate = in.readString();
         addedby_id = in.readString();
         imagepath = in.readString();
+
     }
 
     public static final Creator<Enquiry> CREATOR = new Creator<Enquiry>() {
@@ -99,6 +102,70 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
             return new Enquiry[size];
         }
     };
+
+    public String getVillagename() {
+        return villagename;
+    }
+
+    public void setVillagename(String villagename) {
+        this.villagename = villagename;
+    }
+
+    public String getAddedbyid() {
+        return addedbyid;
+    }
+
+    public void setAddedbyid(String addedbyid) {
+        this.addedbyid = addedbyid;
+    }
+
+    public String getAddedby_id() {
+        return addedby_id;
+    }
+
+    public void setAddedby_id(String addedby_id) {
+        this.addedby_id = addedby_id;
+    }
+
+    public String getAddeddate() {
+        return addeddate;
+    }
+
+    public void setAddeddate(String addeddate) {
+        this.addeddate = addeddate;
+    }
+
+    public String getAdded_date() {
+        return added_date;
+    }
+
+    public void setAdded_date(String added_date) {
+        this.added_date = added_date;
+    }
+
+    public String getCityname() {
+        return cityname;
+    }
+
+    public void setCityname(String cityname) {
+        this.cityname = cityname;
+    }
+
+    public String getUpdatedate() {
+        return updatedate;
+    }
+
+    public void setUpdatedate(String updatedate) {
+        this.updatedate = updatedate;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
+    }
 
     public String getId() {
         return id;
@@ -172,13 +239,6 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
         this.place_image = place_image;
     }
 
-    public String getAddeddate() {
-        return addeddate;
-    }
-
-    public void setAddeddate(String addeddate) {
-        this.addeddate = addeddate;
-    }
 
     public String getCostofculha() {
         return costofculha;
@@ -212,21 +272,6 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
         this.step2image = step2image;
     }
 
-    public String getUpdatedate() {
-        return updatedate;
-    }
-
-    public void setUpdatedate(String updatedate) {
-        this.updatedate = updatedate;
-    }
-
-    public String getAddedbyid() {
-        return addedbyid;
-    }
-
-    public void setAddedbyid(String addedbyid) {
-        this.addedbyid = addedbyid;
-    }
 
     public String getStime() {
         return stime;
@@ -390,4 +435,5 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
         dest.writeString(addedby_id);
         dest.writeString(imagepath);
     }
+
 }

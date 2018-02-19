@@ -13,12 +13,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.admin.rcadmin.R;
-import com.example.admin.rcadmin.enquiry.adapter.EnquiryListAdapter;
+import com.example.admin.rcadmin.constants.AppConstants;
+import com.example.admin.rcadmin.enquiry.adapter.EnquiryAdapter;
 import com.example.admin.rcadmin.enquiry.apihelper.Admin_WebApiHelper;
-import com.example.admin.rcadmin.enquiry.listener.ApiResultListener;
+import com.example.admin.rcadmin.listener.ApiResultListener;
 import com.example.admin.rcadmin.enquiry.model.Enquiry;
+import com.example.admin.rcadmin.pref_manager.PrefManager;
 
 import java.util.ArrayList;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -26,9 +30,11 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class EnquiryFragment extends Fragment {
 
     private RecyclerView list_CustomersRecyclerView;
-    private EnquiryListAdapter enquiryListAdapter;
+    private EnquiryAdapter enquiryListAdapter;
     private ArrayList<Enquiry> enquiryArrayList;
     private SweetAlertDialog sweetAlertDialog;
+    private PrefManager prefManager;
+
 
     protected Handler handler;
 
@@ -50,7 +56,6 @@ public class EnquiryFragment extends Fragment {
 
     public void setEnquiryType(String enquiryType)
     {
-
         this.enquiryType=enquiryType;
     }
 
@@ -59,7 +64,13 @@ public class EnquiryFragment extends Fragment {
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("New Enquiry");
+
+       /* if (prefManager.getLanguage().equalsIgnoreCase(AppConstants.MARATHI)) {
+            getActivity().setTitle(getResources().getString(R.string.new_enquiry_marathi));
+        } else {
+            getActivity().setTitle(getResources().getString(R.string.new_enquiry_english));
+        }
+*/
     }
 
     public EnquiryFragment() {
@@ -80,9 +91,6 @@ public class EnquiryFragment extends Fragment {
 
     private void initializations(View view)
     {
-        //((AppCompatActivity)getActivity()).setSupportActionBar(newEnquiry_toolbar);
-       // newEnquiry_toolbar=(Toolbar)view.findViewById(R.id.newEnquiryToolbar);
-        handler = new Handler();
         list_CustomersRecyclerView=(RecyclerView)view.findViewById(R.id.listCustomers);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         list_CustomersRecyclerView.setLayoutManager(layoutManager);
@@ -90,22 +98,42 @@ public class EnquiryFragment extends Fragment {
         list_CustomersRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         list_CustomersRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        prefManager=new PrefManager(getActivity());
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = getActivity().getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        }
+
     }
 
     private void getEnquiryListFromServer()
     {
-        sweetAlertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE)
-                .setTitleText("Please wait");
+        sweetAlertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
 
+        if(prefManager.getLanguage().equalsIgnoreCase(AppConstants.MARATHI)) {
+            sweetAlertDialog.setConfirmText(getResources().getString(R.string.please_wait_marathi));
+        }
+        else
+        {
+            sweetAlertDialog.setConfirmText(getResources().getString(R.string.please_wait_english));
+        }
         sweetAlertDialog.show();
-
 
         Admin_WebApiHelper.customerEnquiryAPi(getActivity(), enquiryArrayList,enquiryType, new ApiResultListener() {
             @Override
             public void onSuccess(String message) {
                 sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                 sweetAlertDialog.setTitleText(message);
-                sweetAlertDialog.setConfirmText("Ok");
+                if(prefManager.getLanguage().equalsIgnoreCase(AppConstants.MARATHI)) {
+                    sweetAlertDialog.setConfirmText(getResources().getString(R.string.please_wait_marathi));
+                }
+                else
+                {
+                    sweetAlertDialog.setConfirmText(getResources().getString(R.string.please_wait_english));
+                }
                 sweetAlertDialog.dismissWithAnimation();
                 sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
@@ -120,7 +148,13 @@ public class EnquiryFragment extends Fragment {
             public void onError(String message) {
                 sweetAlertDialog.changeAlertType(SweetAlertDialog.ERROR_TYPE);
                 sweetAlertDialog.setTitleText(""+message);
-                sweetAlertDialog.setConfirmText("Ok");
+                if(prefManager.getLanguage().equalsIgnoreCase(AppConstants.MARATHI)) {
+                    sweetAlertDialog.setConfirmText(getResources().getString(R.string.please_wait_marathi));
+                }
+                else
+                {
+                    sweetAlertDialog.setConfirmText(getResources().getString(R.string.please_wait_english));
+                }
                 sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -136,7 +170,7 @@ public class EnquiryFragment extends Fragment {
     {
         enquiryArrayList=new ArrayList<Enquiry>();
         getEnquiryListFromServer();
-        enquiryListAdapter = new EnquiryListAdapter(getContext(),enquiryArrayList,list_CustomersRecyclerView);
+        enquiryListAdapter = new EnquiryAdapter(getContext(),enquiryArrayList,list_CustomersRecyclerView);
         list_CustomersRecyclerView.setAdapter(enquiryListAdapter);
 
     }
