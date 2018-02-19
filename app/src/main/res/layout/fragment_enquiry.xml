@@ -8,24 +8,7 @@
     android:orientation="vertical"
     android:background="@color/colorGray">
 
-    <!--<android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:title="New Enquiry"
-        android:id="@+id/newEnquiryToolbar"
-        app:titleTextColor="@color/colorWhite"
-        app:navigationIcon="@drawable/ic_arrow_back_white_24dp">
 
-    </android.support.v7.widget.Toolbar>-->
-   <!-- <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Enqury"
-        android:layout_margin="16dp"
-        android:textSize="16dp"
-        android:textColor="@color/colorBlack"
-        android:textStyle="bold"/>-->
 
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="20dp"

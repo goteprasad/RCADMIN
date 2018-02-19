@@ -37,11 +37,12 @@
                         android:text="Mobile Number"
                         android:textStyle="bold"/>
                     <TextView
-                        android:id="@+id/customer_village"
+                        android:id="@+id/customer_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Village"/>
                 </LinearLayout>
+
                 <TextView
                     android:textColor="@color/colorBlack"
                     android:id="@+id/customer_age"

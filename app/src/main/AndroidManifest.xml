@@ -32,12 +32,10 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.MainActivity" android:theme="@style/AppTheme" />
         <activity android:name=".user_login.LoginActivity"></activity>
-        <activity android:name=".scanner.AdharScanner"></activity>
+        <activity android:name=".activity.LanguageSelectionActivity"></activity>
+
     </application>
 
 </manifest>

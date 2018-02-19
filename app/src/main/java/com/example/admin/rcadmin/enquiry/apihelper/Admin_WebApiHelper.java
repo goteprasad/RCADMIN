@@ -1,7 +1,6 @@
 package com.example.admin.rcadmin.enquiry.apihelper;
 
 import android.app.Activity;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -15,7 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.admin.rcadmin.app.MyApplication;
 import com.example.admin.rcadmin.constants.WebServiceUrls;
-import com.example.admin.rcadmin.enquiry.listener.ApiResultListener;
+import com.example.admin.rcadmin.listener.ApiResultListener;
 import com.example.admin.rcadmin.enquiry.model.Enquiry;
 import com.example.admin.rcadmin.pref_manager.PrefManager;
 
@@ -26,8 +25,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
-
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 public class Admin_WebApiHelper {
@@ -57,7 +54,22 @@ public class Admin_WebApiHelper {
 
                                 JSONObject jsonObject = result.getJSONObject(i);
 
+                                enquiry.setCityname(jsonObject.getString("cityname"));
                                 enquiry.setId(jsonObject.getString("id"));
+                                enquiry.setCustomerid(jsonObject.getString("customerid"));
+                                enquiry.setAdharid(jsonObject.getString("adharid"));
+                                enquiry.setName(jsonObject.getString("name"));
+                                enquiry.setAddress(jsonObject.getString("address"));
+                                enquiry.setAge(jsonObject.getString("age"));
+                                enquiry.setGender(jsonObject.getString("gender"));
+                                enquiry.setMobile(jsonObject.getString("mobile"));
+                                enquiry.setVillageid(jsonObject.getString("villageid"));
+                                enquiry.setCiti_id(jsonObject.getString("citi_id"));
+                                enquiry.setAdded_date(jsonObject.getString("added_date"));
+                                enquiry.setUploaddate(jsonObject.getString("uploaddate"));
+                                enquiry.setUpdatedate(jsonObject.getString("updatedate"));
+                                enquiry.setAddedbyid(jsonObject.getString("addedbyid"));
+                                enquiry.setImagepath(jsonObject.getString("imagepath"));
                                 enquiry.setKitchen_id(jsonObject.getString("kitchen_id"));
                                 enquiry.setRoofType(jsonObject.getString("roofType"));
                                 enquiry.setHousetype(jsonObject.getString("housetype"));
@@ -72,23 +84,16 @@ public class Admin_WebApiHelper {
                                 enquiry.setState(jsonObject.getString("state"));
                                 enquiry.setStep1image(jsonObject.getString("step1image"));
                                 enquiry.setStep2image(jsonObject.getString("step2image"));
-                                enquiry.setUpdatedate(jsonObject.getString("updatedate"));
-                                enquiry.setAddedbyid(jsonObject.getString("addedbyid"));
+                                enquiry.setUpdateDate(jsonObject.getString("updateDate"));
+                                enquiry.setAddedby_id(jsonObject.getString("addedby_id"));
                                 enquiry.setStime(jsonObject.getString("stime"));
                                 enquiry.setEndtime(jsonObject.getString("endtime"));
                                 enquiry.setAdminactiondate(jsonObject.getString("adminactiondate"));
                                 enquiry.setComment(jsonObject.getString("comment"));
-                                enquiry.setCustomerid(jsonObject.getString("customerid"));
-                                enquiry.setAdharid(jsonObject.getString("adharid"));
-                                enquiry.setName(jsonObject.getString("name"));
-                                enquiry.setAddress(jsonObject.getString("address"));
-                                enquiry.setAge(jsonObject.getString("age"));
-                                enquiry.setGender(jsonObject.getString("gender"));
-                                enquiry.setMobile(jsonObject.getString("mobile"));
-                                enquiry.setVillageid(jsonObject.getString("villageid"));
-                                enquiry.setCiti_id(jsonObject.getString("citi_id"));
-                                enquiry.setUploaddate(jsonObject.getString("uploaddate"));
-                                enquiry.setImagepath(jsonObject.getString("imagepath"));
+                                enquiry.setVillagename(jsonObject.getString("villagename"));
+
+
+                                JSONArray team = jsonObject.getJSONArray("team");
 
                                 enquirieslist.add(enquiry);
                             }
@@ -164,7 +169,7 @@ public class Admin_WebApiHelper {
                 }
                 else
                 {
-                    params.put("state","");
+                    params.put("state","N");
                 }
                 return params;
             }
@@ -173,6 +178,5 @@ public class Admin_WebApiHelper {
         MyApplication.getInstance().addToRequestQueue(strReq);
         return true;
     }
-
 }
 

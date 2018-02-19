@@ -48,16 +48,25 @@ public class SplashActivity extends AppCompatActivity
 
     public void check()
     {
+        Intent intent;
         if (prefManager.isLoggedIn()) {
 
-            Intent intent=new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-
+            if(prefManager.isLanguageSelected())
+            {
+                intent=new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            else
+            {
+                intent=new Intent(SplashActivity.this, LanguageSelectionActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
         else
         {
-            Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
+            intent=new Intent(SplashActivity.this,LanguageSelectionActivity.class);
             startActivity(intent);
             finish();
         }

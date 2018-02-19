@@ -11,13 +11,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.admin.rcadmin.R;
-import com.example.admin.rcadmin.construction_team.ConstructionTeamRegistrationFragment;
+import com.example.admin.rcadmin.about.AboutFragment;
+import com.example.admin.rcadmin.add_technician.AddTechnicianFragment;
 import com.example.admin.rcadmin.enquiry.EnquiryFragment;
 import com.example.admin.rcadmin.enquiry.model.Enquiry;
 import com.example.admin.rcadmin.pref_manager.PrefManager;
+import com.example.admin.rcadmin.technician_list.TechnicianListFragment;
 import com.example.admin.rcadmin.user_login.LoginActivity;
+
+import static com.example.admin.rcadmin.constants.AppConstants.MARATHI;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,19 +30,34 @@ public class MainActivity extends AppCompatActivity
     private PrefManager prefManager;
     FragmentTransaction fragmentTransaction;
     EnquiryFragment enquiryFragment;
+    AddTechnicianFragment addTechnicianFragment;
     Enquiry enquiry;
     String title;
+    public static  Toolbar toolbar;
+    private TextView navTextViewMobile;
+    int PRIVATE_MODE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        prefManager=new PrefManager(getApplication());
+
+        if (prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+
+            setContentView(R.layout.activity_main_marathi);
+        }
+        else
+        {
+            setContentView(R.layout.activity_main_english);
+        }
 
         enquiry=getIntent().getParcelableExtra("");
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        prefManager=new PrefManager(getApplicationContext());
+        navTextViewMobile=(TextView)findViewById(R.id.nav_textView_mobile);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -47,9 +67,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
         displaySelectedScreen(R.id.new_enquiry);
-
-
 
     }
     @Override
@@ -64,7 +83,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.\
@@ -107,53 +125,99 @@ public class MainActivity extends AppCompatActivity
 
         Fragment fragment = null;
 
-        switch (itemId) {
-            case R.id.new_enquiry:
-                title = getString(R.string.new_enquiry);
-                enquiryTransaction(Enquiry.NEW);
-                break;
+            switch (itemId) {
+                case R.id.new_enquiry:
+                    if (prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+                        toolbar.setTitle(getResources().getString(R.string.new_enquiry_marathi));
+                    }
+                    else
+                    {
+                        toolbar.setTitle(getResources().getString(R.string.new_enquiry_english));
+                    }
+                    enquiryTransaction(Enquiry.NEW);
+                    break;
 
-            case R.id.material_sent:
-                title = getString(R.string.material_sent);
-                enquiryTransaction(Enquiry.MATERIALSEND);
-                break;
+                case R.id.material_sent:
+                    if (prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+                        toolbar.setTitle(getResources().getString(R.string.material_sent_marathi));
+                    }
+                    else
+                    {
+                        toolbar.setTitle(getResources().getString(R.string.material_sent_english));
+                    }
+                    enquiryTransaction(Enquiry.MATERIALSEND);
+                    break;
 
-            case R.id.construction_complete:
-                title = getString(R.string.complete_construction);
-                enquiryTransaction(Enquiry.CONSTRUCTION_COMPLITED);
-                break;
+                case R.id.construction_complete:
+                    if (prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+                        toolbar.setTitle(getResources().getString(R.string.complete_construction_marathi));
+                    }
+                    else
+                    {
+                        toolbar.setTitle(getResources().getString(R.string.complete_construction_english));
+                    }
+                    enquiryTransaction(Enquiry.CONSTRUCTION_COMPLITED);
+                    break;
+
+                case R.id.technician_list:
+                    if (prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+                        toolbar.setTitle(getResources().getString(R.string.technician_list_marathi));
+                    }
+                    else
+                    {
+                        toolbar.setTitle(getResources().getString(R.string.technician_list_english));
+                    }
+                    fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    TechnicianListFragment technicianListFragment = new TechnicianListFragment();
+                    fragmentTransaction.replace(R.id.frameLayout, technicianListFragment).addToBackStack(null).commit();
+                    break;
 
 
-            case R.id.add_team:
-                title = getString(R.string.member_information);
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                ConstructionTeamRegistrationFragment constructionTeamRegistrationFragment = new ConstructionTeamRegistrationFragment();
-                fragmentTransaction.replace(R.id.frameLayout, constructionTeamRegistrationFragment).commit();
-                break;
+                case R.id.add_technician:
+                    if (prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+                        toolbar.setTitle(getResources().getString(R.string.technician_information_marathi));
+                    }
+                    else
+                    {
+                        toolbar.setTitle(getResources().getString(R.string.technician_information_english));
+                    }
 
-            case R.id.logout:
-                prefManager.setLogOut();
-                Intent i= new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
-                break;
+                    fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    AddTechnicianFragment addTechnicianFragment = new AddTechnicianFragment();
+                    fragmentTransaction.replace(R.id.frameLayout, addTechnicianFragment).addToBackStack(null).commit();
+                    break;
 
-            default:
-                break;
+
+                case R.id.about:
+                    if (prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+                        toolbar.setTitle(getResources().getString(R.string.about_marathi));
+                    }
+                    else
+                    {
+                        toolbar.setTitle(getResources().getString(R.string.about_english));
+                    }
+
+                    fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    AboutFragment aboutFragment = new AboutFragment();
+                    fragmentTransaction.replace(R.id.frameLayout, aboutFragment).addToBackStack(null).commit();
+                    break;
+
+                case R.id.logout:
+                    prefManager.setLogOut();
+                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(i);
+                    finish();
+                    break;
+
+                default:
+                    break;
+            }
+
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
 
-        setTitle();
-        /*//replacing the fragment
-        if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frameLayout, fragment);
-            ft.commit();
-        }
-*/
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-    }
 
     void enquiryTransaction(String type)
     {
@@ -162,9 +226,9 @@ public class MainActivity extends AppCompatActivity
         enquiryFragment = new EnquiryFragment();
         fragmentTransaction.replace(R.id.frameLayout, enquiryFragment).commit();
         enquiryFragment.setEnquiryType(type);
+
+
     }
 
-    private void setTitle() {
-        getSupportActionBar().setTitle(title);
-    }
+
 }
