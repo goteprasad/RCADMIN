@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class UpdateEnquiry_ApiHelper {
 
-    public static void updateTechnicianAPi(final Activity activity, final Enquiry enquiry, final ApiResultListener listner)
+    public static void updateTechnicianAPi(final Activity activity, final Enquiry enquiry, final ApiResultListener listner, final String state)
     {
         StringRequest strReq = new StringRequest(Request.Method.POST, WebServiceUrls.urlUpdateEnquiry, new Response.Listener<String>() {
             @Override
@@ -168,7 +168,7 @@ public class UpdateEnquiry_ApiHelper {
                 &customerid=CU_18021109520121_2*/
 
                 params.put("kitchen_id",enquiry.getKitchen_id());
-                params.put("state", "N");
+                params.put("state", state);
                 params.put("format","json");
                 params.put("mobile",new PrefManager(activity).getMobile());
                 params.put("password",new PrefManager(activity).getPassword());

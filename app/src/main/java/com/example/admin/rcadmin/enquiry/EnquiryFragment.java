@@ -2,6 +2,7 @@ package com.example.admin.rcadmin.enquiry;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -40,38 +41,27 @@ public class EnquiryFragment extends Fragment {
 
     String  enquiryType=Enquiry.NEW;
 
-
-
-    private Enquiry enquiry;
-
-    public static EnquiryFragment getInstance(Enquiry enquiry)
+    public static EnquiryFragment getInstance(String enquiry)
     {
         EnquiryFragment fragment = new EnquiryFragment();
         Bundle args = new Bundle();
-        args.putParcelable("Enquiry" , enquiry);
+        args.putString("type" , enquiry);
         fragment.setArguments(args);
         return fragment;
 
     }
 
-    public void setEnquiryType(String enquiryType)
-    {
-        this.enquiryType=enquiryType;
-    }
-
-
     @Override
-    public void onViewCreated(View view,  Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getArguments()!=null)
+        {
+            this.enquiryType=getArguments().getString("type");
 
-
-       /* if (prefManager.getLanguage().equalsIgnoreCase(AppConstants.MARATHI)) {
-            getActivity().setTitle(getResources().getString(R.string.new_enquiry_marathi));
-        } else {
-            getActivity().setTitle(getResources().getString(R.string.new_enquiry_english));
         }
-*/
     }
+
+
 
     public EnquiryFragment() {
         // Required empty public constructor
@@ -174,6 +164,5 @@ public class EnquiryFragment extends Fragment {
         list_CustomersRecyclerView.setAdapter(enquiryListAdapter);
 
     }
-
 
 }

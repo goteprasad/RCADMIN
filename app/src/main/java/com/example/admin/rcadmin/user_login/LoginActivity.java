@@ -16,6 +16,11 @@ import com.example.admin.rcadmin.activity.MainActivity;
 import com.example.admin.rcadmin.R;
 import com.example.admin.rcadmin.constants.AppConstants;
 import com.example.admin.rcadmin.listener.ApiResultListener;
+import com.example.admin.rcadmin.locality.apihelper.Locality_Web_ApiHelper;
+import com.example.admin.rcadmin.locality.listeners.CityListener;
+import com.example.admin.rcadmin.locality.listeners.StateListener;
+import com.example.admin.rcadmin.locality.listeners.VillageListner;
+import com.example.admin.rcadmin.locality.model.Locality;
 import com.example.admin.rcadmin.pref_manager.PrefManager;
 import com.example.admin.rcadmin.user_login.apihelper.Login_ApiHelper;
 
@@ -370,6 +375,170 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
+    private void setCityEvent(final Locality cityList)
+    {
+        cityList.setOnCityEvent(new CityListener() {
+            @Override
+            public void onCity_Add_Success()
+            {
+                //call village list api
+                Locality villageList=new Locality();
+                Locality_Web_ApiHelper.getVillageList(LoginActivity.this,villageList);
+                setVillageEvent(villageList);
+            }
+
+            @Override
+            public void onCity_Add_Failed() {
+                //Toast.makeText(LoginActivity.this,"Failed",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCity_Add_Response_Failed() {
+                //Toast.makeText(LoginActivity.this,"Response Failed",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCity_Add_Json_Error() {
+                // Toast.makeText(LoginActivity.this,"Json Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCity_Add_No_Connection_Error() {
+                // Toast.makeText(LoginActivity.this,"Check net connection",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCity_Add_Server_Error() {
+                //  Toast.makeText(LoginActivity.this,"Server Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCity_Add_Network_Error() {
+                // Toast.makeText(LoginActivity.this,"Network error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCity_Add_Parse_Error() {
+                // Toast.makeText(LoginActivity.this,"Parse error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCity_Add_Unknown_Error() {
+                //  Toast.makeText(LoginActivity.this,"Unknown Error",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setVillageEvent(final Locality villageList)
+    {
+        villageList.setOnVillageEvent(new VillageListner() {
+            @Override
+            public void onVillage_Add_Success() {
+
+                localityDialog.dismissWithAnimation();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onVillage_Add_Failed() {
+                //   Toast.makeText(getActivity(),"Failed",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVillage_Add_Response_Failed() {
+                // Toast.makeText(getActivity(),"Response Failed",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVillage_Add_Json_Error() {
+                // Toast.makeText(getActivity(),"Json Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVillage_Add_No_Connection_Error() {
+                // Toast.makeText(getActivity(),"Check net Connection",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVillage_Add_Server_Error() {
+                // Toast.makeText(getActivity(),"Server Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVillage_Add_Network_Error() {
+                //  Toast.makeText(getActivity(),"Network Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVillage_Add_Parse_Error() {
+                //   Toast.makeText(getActivity(),"Parse Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVillage_Add_Unknown_Error() {
+                // Toast.makeText(getActivity(),"Unknown Error",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setStateEvent(final Locality stateList)
+    {
+        stateList.setOnStateEvent(new StateListener() {
+            @Override
+            public void onState_Add_Success() {
+                //call city list api
+                Locality cityList=new Locality();
+                Locality_Web_ApiHelper.getCityList(LoginActivity.this,cityList);
+                setCityEvent(cityList);
+
+            }
+
+            @Override
+            public void onState_Add_Failed() {
+                // Toast.makeText(LoginActivity.this,"Failed",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onState_Add_Response_Failed() {
+                //  Toast.makeText(LoginActivity.this,"Response Failed",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onState_Add_Json_Error() {
+                // Toast.makeText(LoginActivity.this,"JSON Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onState_Add_No_Connection_Error() {
+                //  Toast.makeText(LoginActivity.this,"No Connection Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onState_Add_Server_Error() {
+                //  Toast.makeText(LoginActivity.this,"Server Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onState_Add_Network_Error() {
+                // Toast.makeText(LoginActivity.this,"Network Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onState_Add_Parse_Error() {
+                // Toast.makeText(LoginActivity.this,"Parse Error",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onState_Add_Unknown_Error() {
+                // Toast.makeText(LoginActivity.this,"Unknown Error",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
 
 
 

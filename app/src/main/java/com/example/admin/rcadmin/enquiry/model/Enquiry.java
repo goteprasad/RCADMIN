@@ -2,11 +2,10 @@ package com.example.admin.rcadmin.enquiry.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v7.widget.RecyclerView;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Enquiry implements Parcelable {
+public class Enquiry implements  Parcelable{
     private String cityname;
     private String id;
     private String kitchen_id;
@@ -44,15 +43,8 @@ public class Enquiry implements Parcelable {
     private String imagepath;
     private String villagename;
 
-
-public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMPLITED="C",FIRE="F";
-
-    public Enquiry() {
-    }
-
-    public Enquiry(Parcel in) {
+    protected Enquiry(Parcel in) {
         cityname = in.readString();
-        villagename = in.readString();
         id = in.readString();
         kitchen_id = in.readString();
         roofType = in.readString();
@@ -82,13 +74,13 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
         mobile = in.readString();
         villageid = in.readString();
         citi_id = in.readString();
-        added_date=in.readString();
         added_date = in.readString();
         uploaddate = in.readString();
         updateDate = in.readString();
         addedby_id = in.readString();
         imagepath = in.readString();
-
+        villagename = in.readString();
+        teamArrayList = in.createTypedArrayList(Team.CREATOR);
     }
 
     public static final Creator<Enquiry> CREATOR = new Creator<Enquiry>() {
@@ -102,6 +94,25 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
             return new Enquiry[size];
         }
     };
+
+    public ArrayList<Team> getTeamArrayList() {
+        return teamArrayList;
+    }
+
+    public void setTeamArrayList(ArrayList<Team> teamArrayList) {
+        this.teamArrayList = teamArrayList;
+    }
+
+    private ArrayList<Team> teamArrayList;
+
+
+
+
+    public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMPLITED="C",FIRE="F";
+
+    public Enquiry() {
+    }
+
 
     public String getVillagename() {
         return villagename;
@@ -393,6 +404,7 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
         this.imagepath = imagepath;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -400,6 +412,7 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(cityname);
         dest.writeString(id);
         dest.writeString(kitchen_id);
         dest.writeString(roofType);
@@ -434,6 +447,7 @@ public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMP
         dest.writeString(updateDate);
         dest.writeString(addedby_id);
         dest.writeString(imagepath);
+        dest.writeString(villagename);
+        dest.writeTypedList(teamArrayList);
     }
-
 }

@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.admin.rcadmin.app.MyApplication;
 import com.example.admin.rcadmin.constants.WebServiceUrls;
+import com.example.admin.rcadmin.enquiry.model.Team;
 import com.example.admin.rcadmin.listener.ApiResultListener;
 import com.example.admin.rcadmin.enquiry.model.Enquiry;
 import com.example.admin.rcadmin.pref_manager.PrefManager;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
+
 
 
 public class Admin_WebApiHelper {
@@ -44,62 +46,92 @@ public class Admin_WebApiHelper {
                     {
                         if(response.getString("message").equalsIgnoreCase("Result foud"))
                         {
-
                             JSONArray result = response.getJSONArray("result");
 
-                            if(result.length()>0) {
-                            for (int i = 0; i < result.length(); i++) {
+                            if(result.length()>0)
+                            {
+                                for (int i = 0; i < result.length(); i++) {
 
                                 Enquiry enquiry=new Enquiry();
 
-                                JSONObject jsonObject = result.getJSONObject(i);
 
-                                enquiry.setCityname(jsonObject.getString("cityname"));
-                                enquiry.setId(jsonObject.getString("id"));
-                                enquiry.setCustomerid(jsonObject.getString("customerid"));
-                                enquiry.setAdharid(jsonObject.getString("adharid"));
-                                enquiry.setName(jsonObject.getString("name"));
-                                enquiry.setAddress(jsonObject.getString("address"));
-                                enquiry.setAge(jsonObject.getString("age"));
-                                enquiry.setGender(jsonObject.getString("gender"));
-                                enquiry.setMobile(jsonObject.getString("mobile"));
-                                enquiry.setVillageid(jsonObject.getString("villageid"));
-                                enquiry.setCiti_id(jsonObject.getString("citi_id"));
-                                enquiry.setAdded_date(jsonObject.getString("added_date"));
-                                enquiry.setUploaddate(jsonObject.getString("uploaddate"));
-                                enquiry.setUpdatedate(jsonObject.getString("updatedate"));
-                                enquiry.setAddedbyid(jsonObject.getString("addedbyid"));
-                                enquiry.setImagepath(jsonObject.getString("imagepath"));
-                                enquiry.setKitchen_id(jsonObject.getString("kitchen_id"));
-                                enquiry.setRoofType(jsonObject.getString("roofType"));
-                                enquiry.setHousetype(jsonObject.getString("housetype"));
-                                enquiry.setHieght(jsonObject.getString("hieght"));
-                                enquiry.setLongitude(jsonObject.getString("longitude"));
-                                enquiry.setLatitude(jsonObject.getString("latitude"));
-                                enquiry.setGeoaddress(jsonObject.getString("geoaddress"));
-                                enquiry.setPlace_image(jsonObject.getString("place_image"));
-                                enquiry.setAddeddate(jsonObject.getString("addeddate"));
-                                enquiry.setCostofculha(jsonObject.getString("costofculha"));
-                                enquiry.setCustomerid(jsonObject.getString("customer_id"));
-                                enquiry.setState(jsonObject.getString("state"));
-                                enquiry.setStep1image(jsonObject.getString("step1image"));
-                                enquiry.setStep2image(jsonObject.getString("step2image"));
-                                enquiry.setUpdateDate(jsonObject.getString("updateDate"));
-                                enquiry.setAddedby_id(jsonObject.getString("addedby_id"));
-                                enquiry.setStime(jsonObject.getString("stime"));
-                                enquiry.setEndtime(jsonObject.getString("endtime"));
-                                enquiry.setAdminactiondate(jsonObject.getString("adminactiondate"));
-                                enquiry.setComment(jsonObject.getString("comment"));
-                                enquiry.setVillagename(jsonObject.getString("villagename"));
+                                JSONObject jsonObjectResult = result.getJSONObject(i);
+
+                                enquiry.setCityname(jsonObjectResult.getString("cityname"));
+                                enquiry.setId(jsonObjectResult.getString("id"));
+                                enquiry.setCustomerid(jsonObjectResult.getString("customerid"));
+                                enquiry.setAdharid(jsonObjectResult.getString("adharid"));
+                                enquiry.setName(jsonObjectResult.getString("name"));
+                                enquiry.setAddress(jsonObjectResult.getString("address"));
+                                enquiry.setAge(jsonObjectResult.getString("age"));
+                                enquiry.setGender(jsonObjectResult.getString("gender"));
+                                enquiry.setMobile(jsonObjectResult.getString("mobile"));
+                                enquiry.setVillageid(jsonObjectResult.getString("villageid"));
+                                enquiry.setCiti_id(jsonObjectResult.getString("citi_id"));
+                                enquiry.setAdded_date(jsonObjectResult.getString("added_date"));
+                                enquiry.setUploaddate(jsonObjectResult.getString("uploaddate"));
+                                enquiry.setUpdatedate(jsonObjectResult.getString("updatedate"));
+                                enquiry.setAddedbyid(jsonObjectResult.getString("addedbyid"));
+                                enquiry.setImagepath(jsonObjectResult.getString("imagepath"));
+                                enquiry.setKitchen_id(jsonObjectResult.getString("kitchen_id"));
+                                enquiry.setRoofType(jsonObjectResult.getString("roofType"));
+                                enquiry.setHousetype(jsonObjectResult.getString("housetype"));
+                                enquiry.setHieght(jsonObjectResult.getString("hieght"));
+                                enquiry.setLongitude(jsonObjectResult.getString("longitude"));
+                                enquiry.setLatitude(jsonObjectResult.getString("latitude"));
+                                enquiry.setGeoaddress(jsonObjectResult.getString("geoaddress"));
+                                enquiry.setPlace_image(jsonObjectResult.getString("place_image"));
+                                enquiry.setAddeddate(jsonObjectResult.getString("addeddate"));
+                                enquiry.setCostofculha(jsonObjectResult.getString("costofculha"));
+                                enquiry.setCustomerid(jsonObjectResult.getString("customer_id"));
+                                enquiry.setState(jsonObjectResult.getString("state"));
+                                enquiry.setStep1image(jsonObjectResult.getString("step1image"));
+                                enquiry.setStep2image(jsonObjectResult.getString("step2image"));
+                                enquiry.setUpdateDate(jsonObjectResult.getString("updateDate"));
+                                enquiry.setAddedby_id(jsonObjectResult.getString("addedby_id"));
+                                enquiry.setStime(jsonObjectResult.getString("stime"));
+                                enquiry.setEndtime(jsonObjectResult.getString("endtime"));
+                                enquiry.setAdminactiondate(jsonObjectResult.getString("adminactiondate"));
+                                enquiry.setComment(jsonObjectResult.getString("comment"));
+                                enquiry.setVillagename(jsonObjectResult.getString("villagename"));
 
 
-                                JSONArray team = jsonObject.getJSONArray("team");
+                                JSONArray teamArray = jsonObjectResult.getJSONArray("team");
+                                ArrayList<Team> teamArrayList =new ArrayList<>();
+                                for (int j = 0; j < teamArray.length(); j++) {
+                                    Team team = new Team();
+
+                                    JSONObject jsonObjectTeam=teamArray.getJSONObject(j);
+
+                                    team.setId(jsonObjectTeam.getString("id"));
+                                    team.setKechain_id(jsonObjectTeam.getString("kechain_id"));
+                                    team.setTechnitionid(jsonObjectTeam.getString("technitionid"));
+                                    team.setCustomerid(jsonObjectTeam.getString("customerid"));
+                                    team.setStarttime(jsonObjectTeam.getString("starttime"));
+                                    team.setEndtime(jsonObjectTeam.getString("endtime"));
+                                    team.setAddedby_id(jsonObjectTeam.getString("addedby_id"));
+                                    team.setName(jsonObjectTeam.getString("name"));
+                                    team.setMobile(jsonObjectTeam.getString("mobile"));
+                                    team.setDob(jsonObjectTeam.getString("dob"));
+                                    team.setGender(jsonObjectTeam.getString("gender"));
+                                    team.setAddress(jsonObjectTeam.getString("address"));
+                                    team.setAddedby(jsonObjectTeam.getString("addedby"));
+                                    team.setAddeddate(jsonObjectTeam.getString("addeddate"));
+                                    team.setVillageid(jsonObjectTeam.getString("villageid"));
+
+
+                                    teamArrayList.add(team);
+                                }
+                                enquiry.setTeamArrayList(teamArrayList);
 
                                 enquirieslist.add(enquiry);
                             }
+
+
                             listner.onSuccess(message);
 
                         }
+
 
                             else
                             {
