@@ -221,11 +221,11 @@ public class MainActivity extends AppCompatActivity
 
     void enquiryTransaction(String type)
     {
-        enquiryFragment=new EnquiryFragment();
+
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        enquiryFragment = new EnquiryFragment();
+        enquiryFragment =  EnquiryFragment.getInstance(type);
         fragmentTransaction.replace(R.id.frameLayout, enquiryFragment).commit();
-        enquiryFragment.setEnquiryType(type);
+
 
 
     }
