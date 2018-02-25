@@ -27,6 +27,7 @@ import com.example.admin.rcadmin.pref_manager.PrefManager;
 
 import java.util.ArrayList;
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EnquiryFragment extends Fragment {
 
@@ -35,6 +36,7 @@ public class EnquiryFragment extends Fragment {
     private ArrayList<Enquiry> enquiryArrayList;
     private SweetAlertDialog sweetAlertDialog;
     private PrefManager prefManager;
+
 
 
     protected Handler handler;

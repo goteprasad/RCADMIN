@@ -11,6 +11,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.rcadmin.R;
@@ -18,7 +20,11 @@ import com.example.admin.rcadmin.about.AboutFragment;
 import com.example.admin.rcadmin.add_technician.AddTechnicianFragment;
 import com.example.admin.rcadmin.enquiry.EnquiryFragment;
 import com.example.admin.rcadmin.enquiry.model.Enquiry;
+import com.example.admin.rcadmin.locality.database.CityTableHelper;
+import com.example.admin.rcadmin.locality.database.StateTableHelper;
+import com.example.admin.rcadmin.locality.database.VillageTableHelper;
 import com.example.admin.rcadmin.pref_manager.PrefManager;
+import com.example.admin.rcadmin.runtime_permissions.RuntimePermissions;
 import com.example.admin.rcadmin.technician_list.TechnicianListFragment;
 import com.example.admin.rcadmin.user_login.LoginActivity;
 
@@ -36,6 +42,12 @@ public class MainActivity extends AppCompatActivity
     public static  Toolbar toolbar;
     private TextView navTextViewMobile;
     int PRIVATE_MODE = 0;
+    private View navHeader;
+    private TextView appUserName,mobile;
+    private ImageView navImageview;
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
+    private  NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +68,31 @@ public class MainActivity extends AppCompatActivity
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        navTextViewMobile=(TextView)findViewById(R.id.nav_textView_mobile);
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        drawer= (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         displaySelectedScreen(R.id.new_enquiry);
+
+        // Navigation view header
+        navHeader = navigationView.getHeaderView(0);
+        appUserName=(TextView)navHeader.findViewById(R.id.nav_app_user_name);
+        mobile=(TextView)navHeader.findViewById(R.id.nav_textView_mobile);
+        navImageview=(ImageView)navHeader.findViewById(R.id.nav_imageview);
+
+
+        appUserName.setText(prefManager.getUserName());
+        mobile.setText(prefManager.getMobile());
+
+
+        RuntimePermissions.checkReadExternalStoragePermission(MainActivity.this);
+        RuntimePermissions.checkWriteExternalStoragePermission(MainActivity.this);
 
     }
     @Override
@@ -159,6 +183,17 @@ public class MainActivity extends AppCompatActivity
                     enquiryTransaction(Enquiry.CONSTRUCTION_COMPLITED);
                     break;
 
+                case R.id.cancel_order:
+                    if (prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+                        toolbar.setTitle(getResources().getString(R.string.cancel_order_marathi));
+                    }
+                    else
+                    {
+                        toolbar.setTitle(getResources().getString(R.string.cancel_order_english));
+                    }
+                    enquiryTransaction(Enquiry.DENIED);
+                    break;
+
                 case R.id.technician_list:
                     if (prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
                         toolbar.setTitle(getResources().getString(R.string.technician_list_marathi));
@@ -204,6 +239,10 @@ public class MainActivity extends AppCompatActivity
 
                 case R.id.logout:
                     prefManager.setLogOut();
+                    StateTableHelper.deleteStateData(this);
+                    CityTableHelper.deleteCityData(this);
+                    VillageTableHelper.deleteCityData(this);
+
                     Intent i = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(i);
                     finish();

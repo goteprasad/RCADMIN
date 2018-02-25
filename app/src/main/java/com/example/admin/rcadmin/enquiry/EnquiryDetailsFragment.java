@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.admin.rcadmin.R;
-import com.example.admin.rcadmin.add_technician.adapter.TechnicianAdapter;
 import com.example.admin.rcadmin.add_technician.model.Technician;
 import com.example.admin.rcadmin.constants.AppConstants;
 import com.example.admin.rcadmin.enquiry.adapter.EnquiryAdapter;
@@ -42,7 +41,6 @@ public class EnquiryDetailsFragment extends Fragment {
 
     private RecyclerView technician_recyclerView;
     private ArrayList<Technician> technicianArrayList;
-    private TechnicianAdapter technicianAdapter;
     private TextView customer_name, mobile_number, village_name, aadhar_number,
             customer_age, roof_type, house_type, kitchen_height, enquiry_date,
             enquiry_by, technicianTeamLabel;
@@ -105,34 +103,58 @@ public class EnquiryDetailsFragment extends Fragment {
         setCustomerData();
 
 
-        teamAdapter = new TeamAdapter(getContext(), teamArrayList, technician_recyclerView);
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        technician_recyclerView.setLayoutManager(layoutManager);
-        technician_recyclerView.setAdapter(teamAdapter);
-
-
         if (enquiry.getState().equalsIgnoreCase(Enquiry.NEW)) {
             btnSendMaterial.setVisibility(View.VISIBLE);
             btnCancelOrder.setVisibility(View.VISIBLE);
         }
+        else if(enquiry.getState().equalsIgnoreCase(Enquiry.MATERIALSEND))
+        {
+            btnSendMaterial.setVisibility(View.VISIBLE);
+            btnCancelOrder.setVisibility(View.INVISIBLE);
+            btnSendMaterial.setClickable(false);
+            btnSendMaterial.setText(R.string.sent_material_already_english);
+            btnSendMaterial.setBackgroundColor(getResources().getColor(R.color.red));
+
+        }
+
+        else if(enquiry.getState().equalsIgnoreCase(Enquiry.DENIED))
+        {
+            btnCancelOrder.setVisibility(View.VISIBLE);
+            btnSendMaterial.setVisibility(View.INVISIBLE);
+            btnCancelOrder.setClickable(false);
+            btnCancelOrder.setText(R.string.cancel_order_already_english);
+            btnCancelOrder.setBackgroundColor(getResources().getColor(R.color.red));
+
+        }
+
+
+
         else
         {
             btnSendMaterial.setVisibility(View.INVISIBLE);
             btnCancelOrder.setVisibility(View.INVISIBLE);
-            technicianTeamLabel.setVisibility(View.INVISIBLE);
+
+            //technicianTeamLabel.setVisibility(View.INVISIBLE);
 
         }
+
         btnSendMaterial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUpdateEnquiry(Enquiry.MATERIALSEND);
+                if(!enquiry.getState().equalsIgnoreCase(Enquiry.MATERIALSEND))
+                {
+                    setUpdateEnquiry(Enquiry.MATERIALSEND);
+                }
+
             }
         });
+
         btnCancelOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUpdateEnquiry(Enquiry.DENIED);
+                if(!enquiry.getState().equalsIgnoreCase(Enquiry.DENIED)) {
+                    setUpdateEnquiry(Enquiry.DENIED);
+                }
             }
         });
         return view;
@@ -155,7 +177,18 @@ public class EnquiryDetailsFragment extends Fragment {
         btnSendMaterial = (Button) view.findViewById(R.id.btn_send_material);
         btnCancelOrder = (Button) view.findViewById(R.id.btn_cancel_order);
         technicianTeamLabel = (TextView) view.findViewById(R.id.technician_team_label);
+
+
         technician_recyclerView = (RecyclerView) view.findViewById(R.id.technicianRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        technician_recyclerView.setLayoutManager(layoutManager);
+
+        technician_recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+        technician_recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        teamArrayList=enquiry.getTeamArrayList();
+        teamAdapter = new TeamAdapter(getContext(),teamArrayList,technician_recyclerView);
+        technician_recyclerView.setAdapter(teamAdapter);
 
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
@@ -181,6 +214,18 @@ public class EnquiryDetailsFragment extends Fragment {
         kitchen_height.setText(String.valueOf(enquiry.getHieght() + " Ft"));
         enquiry_date.setText(String.valueOf(enquiry.getAddeddate()));
         enquiry_by.setText(String.valueOf(enquiry.getName()));
+
+
+
+
+        Glide.with(getActivity()).load(AppConstants.HOST_NAME+enquiry.getPlace_image())
+                .error(R.drawable.plannedarea)
+                .into(placeImageView);
+
+        Glide.with(getActivity()).load(AppConstants.HOST_NAME+enquiry.getImagepath())
+                .error(R.drawable.ic_user)
+                .into(profile_image);
+
 
     }
 
@@ -210,6 +255,8 @@ public class EnquiryDetailsFragment extends Fragment {
                         sweetAlertDialog.dismissWithAnimation();
                         btnSendMaterial.setVisibility(View.GONE);
                         btnCancelOrder.setVisibility(View.GONE);
+
+
                     }
                 });
 
@@ -234,7 +281,4 @@ public class EnquiryDetailsFragment extends Fragment {
         }, state);
     }
 
-
-
-
-   }
+}
