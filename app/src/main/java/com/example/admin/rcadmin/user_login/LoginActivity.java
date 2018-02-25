@@ -158,13 +158,17 @@ public class LoginActivity extends AppCompatActivity {
                             localityDialog.setTitleText(getResources().getString(R.string.please_wait_english));
                         }
                         localityDialog.show();
-                        localityDialog.dismissWithAnimation();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Locality stateList=new Locality();
+                        Locality_Web_ApiHelper.getStateList(LoginActivity.this,stateList);
+                        setStateEvent(stateList);
+
+                        //localityDialog.dismissWithAnimation();
+                      /*  Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
                         sweetAlertDialog.dismissWithAnimation();
-
+*/
 
 
                     }
@@ -441,6 +445,7 @@ public class LoginActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
+                sweetAlertDialog.dismissWithAnimation();
             }
 
             @Override
@@ -539,6 +544,8 @@ public class LoginActivity extends AppCompatActivity {
 
         });
     }
+
+
 
 
 

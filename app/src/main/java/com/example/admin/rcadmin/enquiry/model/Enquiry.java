@@ -42,6 +42,7 @@ public class Enquiry implements  Parcelable{
     private String addedby_id;
     private String imagepath;
     private String villagename;
+    private ArrayList<Team> teamArrayList;
 
     protected Enquiry(Parcel in) {
         cityname = in.readString();
@@ -102,11 +103,6 @@ public class Enquiry implements  Parcelable{
     public void setTeamArrayList(ArrayList<Team> teamArrayList) {
         this.teamArrayList = teamArrayList;
     }
-
-    private ArrayList<Team> teamArrayList;
-
-
-
 
     public static final String NEW="N",DENIED="D",MATERIALSEND="S",CONSTRUCTION_COMPLITED="C",FIRE="F";
 

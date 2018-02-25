@@ -55,8 +55,12 @@
     <string name="female_english">Female</string>
     <string name="save_english">Save</string>
     <string name="mobile_number_english">Mobile Number: </string>
+    <string name="sent_material_already_english">Material Already Sent</string>
+    <string name="cancel_order_already_english">Order Already Cancel </string>
 
 
+    <string name="cancel_order_already_marathi">ऑर्डर आधीपासून रद्द झाली आहे</string>
+    <string name="sent_material_already_marathi">साहित्य आधीच पाठवलेली आहे</string>
     <string name="mobile_number_marathi">मोबाइल नंबर: </string>
     <string name="save_marathi">जतन करा</string>
     <string name="male_marathi">पुरूष</string>
@@ -106,5 +110,8 @@
     <string name="technician_information_marathi">कारागीरांची माहिती</string>
     <string name="technician_list_marathi">कारागीरांची यादी</string>
     <string name="about_marathi">बाबत</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
