@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin Rural Caravan"
+            android:layout_marginTop="90dp"
+            android:textStyle="bold"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="आवृत्ती १. ०"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <ImageView
+            android:background="@drawable/shape"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/app_icon_admin"
+            android:layout_marginTop="10dp"/>
+
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:text="ग्रामीण समृद्धीस प्रोत्साहन देण्यासारख्या विविध सहकार्यांद्वारे गावच्या समृद्ध सांस्कृतिक वारसा आणि जीवनशैलीचे जतन करताना आम्ही ग्रामीण भागातील समूहाच्या विकासासाठी वचनबद्ध आहोत. शाश्वत विकास कार्यक्रमांची सक्षमीकरण आणि ग्रामीण उत्पादनांसाठी बाजार तयार करण्यास मदत करत आहोत."
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+</RelativeLayout>
