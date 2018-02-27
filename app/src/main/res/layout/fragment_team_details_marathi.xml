@@ -1,0 +1,784 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:squint="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.admin.rcadmin.add_technician.TeamDetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+        <!-- Scan Id new Back Layout  -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan_id_back_layout_new"
+            android:elevation="5dp"
+            android:background="@drawable/round_bg"
+            android:layout_margin="40dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.intrusoft.squint.DiagonalView
+                        android:id="@+id/diagonal1_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="171dp"
+                        android:scaleType="centerCrop"
+                        android:src="@color/colorAccent"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        squint:diagonalDirection="right_to_left"
+                        squint:angle="25"
+                        squint:gravity="right" />
+
+                    <com.intrusoft.squint.DiagonalView
+                        android:id="@+id/diagonal_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/app_bg"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        squint:diagonalDirection="right_to_left"
+                        squint:angle="25"
+                        squint:gravity="right" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_user"
+                        squint:border_color="@color/colorAccent"
+                        squint:border_width="1.5dp"
+                        android:layout_marginTop="25dp"
+                        android:visibility="gone"
+                        android:layout_gravity="center"/>
+
+                    <ImageView
+                        android:layout_width="140dp"
+                        android:layout_height="90dp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_gravity="right"
+                        android:src="@mipmap/logo"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center|bottom"
+                        android:padding="5dp"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        android:text="Priyanka Beldar"/>
+                </FrameLayout>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:text="Support Technician"/>
+
+                <TextView
+                    android:id="@+id/card_technician_joining_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:text="Joining Date : 12 Dec 2017"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/card_technician_expiry_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:text="Expiry Date : 12 Dec 2017"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:id="@+id/card_technician_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:text="Technician Id : TECH123"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:id="@+id/card_technician_address_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:textSize="12dp"
+                    android:text="Address: TECH123 jhhsajhajh hshjaghsjhgasj hhgdjsgggdsagj
+hdggsdgskgjksgkjsjhshf"
+                    android:textColor="@color/colorBlack"/>
+
+
+                <TextView
+                    android:id="@+id/card_technician_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="left"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:padding="5dp"
+                    android:text="asfjhg asjfajfjas asffafuy hgaffysfy ajgsgiuaggagugaugua gugugguguguuigugug"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:id="@+id/card_technician_description1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:padding="5dp"
+                    android:text="asfjhg asjfajfjas asffafuy hgaffysfy ajgsgiuaggagugaugua gugugguguguuigugug"
+                    android:textColor="@color/colorBlack"/>
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.intrusoft.squint.DiagonalView
+                        android:id="@+id/diagonalbo_back"
+                        android:layout_width="91dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@color/colorAccent"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        squint:diagonalDirection="bottom_to_top"
+                        squint:angle="60"
+                        squint:gravity="left" />
+
+                    <com.intrusoft.squint.DiagonalView
+                        android:visibility="visible"
+                        android:layout_width="90dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/app_bg"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        squint:diagonalDirection="bottom_to_top"
+                        squint:angle="60"
+                        squint:gravity="left" />
+
+
+                    <TextView
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="8421068174"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="right|bottom"
+                        android:layout_gravity="bottom|right"/>
+
+                    <TextView
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="www.ruralcaravan.co.org"
+                        android:textColor="@color/colorAccent"
+                        android:gravity="right|bottom"
+                        android:layout_gravity="bottom|right"/>
+
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+
+        <!-- Scan Id new Front Layout  -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan_id_layout_new"
+            android:elevation="5dp"
+            android:visibility="visible"
+            android:background="@drawable/round_bg"
+            android:layout_margin="40dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.intrusoft.squint.DiagonalView
+                        android:id="@+id/diagonal1"
+                        android:layout_width="match_parent"
+                        android:layout_height="171dp"
+                        android:scaleType="centerCrop"
+                        android:src="@color/colorAccent"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        squint:diagonalDirection="right_to_left"
+                        squint:angle="25"
+                        squint:gravity="right" />
+
+                    <com.intrusoft.squint.DiagonalView
+                    android:id="@+id/diagonal"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/app_bg"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="3dp"
+                    squint:diagonalDirection="right_to_left"
+                     squint:angle="25"
+
+                    squint:gravity="right" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_user"
+                        squint:border_color="@color/colorAccent"
+                        squint:border_width="1.5dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_gravity="center"/>
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="80dp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="right"
+                        android:src="@mipmap/logo"/>
+
+                </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:text="Priyanka Beldar"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:text="Support Technician"/>
+
+                <TextView
+                    android:id="@+id/card_technician_mobile_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:text="Mobile : 1234567890"
+                    android:textColor="@color/colorBlack"/>
+                <TextView
+                    android:id="@+id/card_technician_gender_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:text="Technician ID : TC1234"
+                    android:textColor="@color/colorBlack"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                android:background="@color/colorTransparentGreen"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/qr_img_new"
+                        android:layout_gravity="center"
+                        android:src="@drawable/qr_sample"/>
+
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.intrusoft.squint.DiagonalView
+                        android:id="@+id/diagonalbo_back"
+                        android:layout_width="91dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@color/colorAccent"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        squint:diagonalDirection="bottom_to_top"
+                        squint:angle="60"
+                        squint:gravity="left" />
+
+                    <com.intrusoft.squint.DiagonalView
+                        android:visibility="visible"
+                        android:layout_width="90dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/app_bg"
+                        android:layout_marginRight="3dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        squint:diagonalDirection="bottom_to_top"
+                        squint:angle="60"
+                        squint:gravity="left" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="9999999999"
+                        android:textColor="@color/colorAccent"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="www.ruralcaravan.co.org"
+                        android:textColor="@color/colorAccent"
+                        android:gravity="center" />
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+        <!-- Scan Id Front Layout  -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan_id_layout"
+            android:elevation="5dp"
+            android:visibility="gone"
+            android:background="@drawable/round_bg"
+            android:layout_margin="40dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/round_bg1"
+                    android:text="कारागिराचे आयडी कार्ड"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textColor="@color/colorWhite"
+                        android:text="कारागिराचे क्षेत्र"
+                        android:gravity="center"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:background="#739173"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/ic_user"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name : Abc Xyz"
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/card_technician_name"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/card_technician_mobile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Mobile : 1234567890"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/card_technician_gender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Gender : Female"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/card_technician_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Address : vbdhf bhvfdvbh bhjvvbd bvhjfdvbbvfbvf
+ jyyjtjyyjtyty"
+                            android:textColor="@color/colorBlack"/>
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+                    <!--  <ImageView
+                          android:layout_width="0dp"
+                          android:layout_height="50dp"
+                          android:layout_weight="1"
+                          android:padding="4dp"
+                          android:visibility="gone"
+                          android:src="@drawable/barcode"/>
+  -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:text="Exp. : ३१ डिसेंबर २०२०"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@color/colorAccent"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/logo"/>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/qr_img"
+                        android:padding="10dp"
+                        android:src="@drawable/qr_sample"/>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="www.ruralcaravan.co.org"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center|top"
+            android:src="@drawable/ic_user"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/technician_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mallinda Hollaway"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/technician_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="468956675432"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/technician_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="N- 5 cidco autangabad
+cidco gulmofjghdn fvnfdkjvbb  ugifbd vjhfdg"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/technician_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Female"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/round_bg"
+            android:text="QR कोड तयार करा"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/colorAccent"
+            android:id="@+id/btn_scan_id"/>
+
+
+
+        <!-- Scan Id back Layout  -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan_id_backlayout"
+            android:elevation="5dp"
+            android:visibility="gone"
+            android:background="@drawable/round_bg"
+            android:layout_margin="40dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ग्रामीण समृद्धीस प्रोत्साहन देण्यासारख्या विविध सहकार्यांद्वारे गावच्या समृद्ध सांस्कृतिक वारसा आणि जीवनशैलीचे जतन करताना आम्ही ग्रामीण भागातील समूहाच्या विकासासाठी वचनबद्ध आहोत. शाश्वत विकास कार्यक्रमांची सक्षमीकरण आणि ग्रामीण उत्पादनांसाठी बाजार तयार करण्यास मदत करत आहोत."
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="40dp"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:padding="10dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:background="#dcdada"
+                    android:text="मुदत: ३१ डिसेंबर २०२०"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@color/colorAccent"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/logo"/>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/qr_back_img"
+                        android:padding="10dp"
+                        android:src="@drawable/qr_sample"/>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="www.ruralcaravan.co.org"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

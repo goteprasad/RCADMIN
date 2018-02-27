@@ -1,0 +1,360 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.admin.rcadmin.add_technician.TeamDetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center|top"
+            android:src="@drawable/ic_user"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/technician_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mallinda Hollaway"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/technician_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="468956675432"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/technician_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:text="N- 5 cidco autangabad
+cidco gulmofjghdn fvnfdkjvbb  ugifbd vjhfdg"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/technician_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Female"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/round_bg"
+            android:text="Generate QR Code"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:id="@+id/btn_scan_id"/>
+
+
+        <!-- Scan Id Front Layout  -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan_id_layout"
+            android:elevation="5dp"
+            android:visibility="gone"
+            android:background="@drawable/round_bg"
+            android:layout_margin="40dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/round_bg1"
+                    android:text="TECHNICIAN ID CARD"
+                    android:gravity="center"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/card_bg">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textColor="@color/colorWhite"
+                        android:text="Technician Sector"
+                        android:gravity="center"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:background="#739173"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/ic_user"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name : Abc Xyz"
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/card_technician_name"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/card_technician_mobile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Mobile : 1234567890"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/card_technician_gender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Gender : Female"
+                            android:textColor="@color/colorBlack"/>
+                        <TextView
+                            android:id="@+id/card_technician_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Address : vbdhf bhvfdvbh bhjvvbd bvhjfdvbbvfbvf
+ jyyjtjyyjtyty"
+                            android:textColor="@color/colorBlack"/>
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+                    <!--  <ImageView
+                          android:layout_width="0dp"
+                          android:layout_height="50dp"
+                          android:layout_weight="1"
+                          android:padding="4dp"
+                          android:visibility="gone"
+                          android:src="@drawable/barcode"/>
+  -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorBlack"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"
+                        android:text="Exp. : 31 Dec 2018"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@color/colorAccent"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/logo"/>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/qr_img"
+                        android:padding="10dp"
+                        android:src="@drawable/qr_sample"/>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="www.ruralcaravan.co.org"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+
+        <!-- Scan Id back Layout  -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scan_id_backlayout"
+            android:elevation="5dp"
+            android:visibility="gone"
+            android:background="@drawable/round_bg"
+            android:layout_margin="40dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="We are committed to the development of the rural community by propelling economic activities while preserving the rich cultural heritage and the way-of-life in the villages.We achieve this through varied endeavours like promoting rural tourism; empowering sustainable development activities and creating a market for the rural produce."
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="40dp"
+                    android:textColor="@color/colorBlack"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:padding="10dp"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:background="#dcdada"
+                    android:text="VALID : 31 Dec 2018"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@color/colorAccent"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="20dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@mipmap/logo"/>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/qr_back_img"
+                        android:padding="10dp"
+                        android:src="@drawable/qr_sample"/>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="www.ruralcaravan.co.org"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

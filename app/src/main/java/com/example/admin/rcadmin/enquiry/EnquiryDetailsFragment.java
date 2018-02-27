@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ import com.example.admin.rcadmin.listener.ApiResultListener;
 import com.example.admin.rcadmin.pref_manager.PrefManager;
 
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -54,6 +57,7 @@ public class EnquiryDetailsFragment extends Fragment {
     private PrefManager prefManager;
     private TeamAdapter teamAdapter;
     private ArrayList<Team> teamArrayList;
+    private TextView txtSendMaterial;
 
     String enquiryType = Enquiry.NEW;
 
@@ -106,36 +110,36 @@ public class EnquiryDetailsFragment extends Fragment {
         if (enquiry.getState().equalsIgnoreCase(Enquiry.NEW)) {
             btnSendMaterial.setVisibility(View.VISIBLE);
             btnCancelOrder.setVisibility(View.VISIBLE);
+            txtSendMaterial.setVisibility(View.INVISIBLE);
         }
         else if(enquiry.getState().equalsIgnoreCase(Enquiry.MATERIALSEND))
         {
-            btnSendMaterial.setVisibility(View.VISIBLE);
+            txtSendMaterial.setVisibility(View.VISIBLE);
+            btnSendMaterial.setVisibility(View.INVISIBLE);
             btnCancelOrder.setVisibility(View.INVISIBLE);
-            btnSendMaterial.setClickable(false);
-            btnSendMaterial.setText(R.string.sent_material_already_english);
-            btnSendMaterial.setBackgroundColor(getResources().getColor(R.color.red));
 
         }
 
         else if(enquiry.getState().equalsIgnoreCase(Enquiry.DENIED))
         {
-            btnCancelOrder.setVisibility(View.VISIBLE);
+
+            txtSendMaterial.setVisibility(View.VISIBLE);
+            if(prefManager.getLanguage().equalsIgnoreCase(AppConstants.MARATHI)) {
+                txtSendMaterial.setText(R.string.cancel_order_already_marathi);
+            }
+            else
+            {
+                txtSendMaterial.setText(R.string.cancel_order_already_english);
+            }
             btnSendMaterial.setVisibility(View.INVISIBLE);
-            btnCancelOrder.setClickable(false);
-            btnCancelOrder.setText(R.string.cancel_order_already_english);
-            btnCancelOrder.setBackgroundColor(getResources().getColor(R.color.red));
-
+            btnCancelOrder.setVisibility(View.INVISIBLE);
         }
-
-
 
         else
         {
             btnSendMaterial.setVisibility(View.INVISIBLE);
             btnCancelOrder.setVisibility(View.INVISIBLE);
-
-            //technicianTeamLabel.setVisibility(View.INVISIBLE);
-
+            txtSendMaterial.setVisibility(View.INVISIBLE);
         }
 
         btnSendMaterial.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +181,7 @@ public class EnquiryDetailsFragment extends Fragment {
         btnSendMaterial = (Button) view.findViewById(R.id.btn_send_material);
         btnCancelOrder = (Button) view.findViewById(R.id.btn_cancel_order);
         technicianTeamLabel = (TextView) view.findViewById(R.id.technician_team_label);
+        txtSendMaterial=(TextView)view.findViewById(R.id.txt_send_material);
 
 
         technician_recyclerView = (RecyclerView) view.findViewById(R.id.technicianRecyclerView);
@@ -255,6 +260,7 @@ public class EnquiryDetailsFragment extends Fragment {
                         sweetAlertDialog.dismissWithAnimation();
                         btnSendMaterial.setVisibility(View.GONE);
                         btnCancelOrder.setVisibility(View.GONE);
+                        txtSendMaterial.setVisibility(View.INVISIBLE);
 
 
                     }

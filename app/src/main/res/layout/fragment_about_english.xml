@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin Rural Caravan"
+            android:layout_marginTop="90dp"
+            android:textStyle="bold"
+            android:textSize="25dp"/>
+
+        <TextView
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Version 1.0"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <ImageView
+            android:background="@drawable/shape"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/app_icon_admin"
+            android:layout_marginTop="10dp"/>
+
+
+                <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:text="We are committed to the development of the rural community by propelling economic activities while preserving the rich cultural heritage and the way-of-life in the villages.We achieve this through varied endeavours like promoting rural tourism; empowering sustainable development activities and creating a market for the rural produce."
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+</RelativeLayout>
