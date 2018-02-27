@@ -142,7 +142,7 @@ public class StateTableHelper {
             db.execSQL("DELETE FROM " + StateTable.STATE_TABLE ); //delete all rows in titlebackground table
 
 
-            Toast.makeText(context,"State Data Deleted Successfully",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"State Data Deleted Successfully",Toast.LENGTH_SHORT).show();
 
 
             db.close();

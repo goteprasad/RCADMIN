@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">Admin Rural Caravan</string>
-    <string name="title_activity_main">Rural Caravan</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
 
     <string name="new_enquiry_english">New Enquiry</string>
     <string name="material_sent_english">Material Sent</string>
@@ -22,7 +20,6 @@
     <string name="roof_type_english">Roof Type</string>
     <string name="house_type_english">House Type</string>
     <string name="kitchen_height_english">Kitchen Height</string>
-    <string name="technician_team_label_english">Technician Team</string>
     <string name="send_material_english">Send Material</string>
     <string name="cancel_order_english">Cancel Order</string>
     <string name="enquiry_english">Enquiry</string>
@@ -45,7 +42,6 @@
     <string name="unknown_error_english">Unknown Error</string>
     <string name="please_enter_password_english">Please Enter Password</string>
     <string name="please_enter_username_english">Please Enter Username</string>
-    <string name="app_username_english">App Username</string>
     <string name="add_technician_english">Add Technician</string>
     <string name="technician_name_english">Enter Technician Name</string>
     <string name="technician_address_english">Enter technician Address</string>
@@ -84,7 +80,6 @@
     <string name="login_successfully_marathi">लॉगिन यशस्वी</string>
     <string name="please_wait_marathi">कृपया थांबा</string>
     <string name="marathi">मराठी</string>
-    <string name="language_selection_marathi">भाषा निवडा</string>
     <string name="username_marathi">युझरनेम</string>
     <string name="password_marathi">पासवर्ड</string>
     <string name="login_marathi">लॉगइन</string>
@@ -112,6 +107,5 @@
     <string name="about_marathi">बाबत</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

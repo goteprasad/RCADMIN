@@ -147,7 +147,7 @@ public class VillageTableHelper {
             db.execSQL("DELETE FROM " + VillageTable.VILLAGE_TABLE ); //delete all rows in titlebackground table
 
 
-            Toast.makeText(context,"Village Data Deleted Successfully",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"Village Data Deleted Successfully",Toast.LENGTH_SHORT).show();
 
 
             db.close();

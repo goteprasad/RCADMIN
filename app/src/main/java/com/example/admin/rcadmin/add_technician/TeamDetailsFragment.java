@@ -1,10 +1,15 @@
 package com.example.admin.rcadmin.add_technician;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.admin.rcadmin.R;
@@ -28,6 +34,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -39,18 +47,21 @@ public class TeamDetailsFragment extends Fragment {
     private Technician technician;
     //private TechnicianList technicianList;
 
-    private Button generateQrBtn;
-    private ImageView resultQrImg, resultQrBackImg;
+    private ImageView resultQrImg;
+    private boolean isQRCreated = false;
+    private SweetAlertDialog sweetAlertDialog;
 
     Thread thread ;
     public final static int QRcodeWidth = 500 ;
     Bitmap bitmap ;
-    RelativeLayout qrRelativeLayout, qrIdBackLayout;
-    private SweetAlertDialog sweetAlertDialog;
+    LinearLayout qrIdFrontLayout, qrIdBackLayout;
     private PrefManager prefManager;
+    private TextView newBackCardTechnicianName,
+            newCardFrontTechnicianName,newCardTechnicianMobile,newCardTechnicianId,newBackCardTechnicianPost,
+            newCardFrontTechnicianPost,newBackCardJoiningDate,newBackCardExpiryDate,newBackCardTechnicianId,
+            newBackCardAddress,btnDownload;
 
-    private TextView technicianName,technicianMobile,technicianAddress,technicianGender,
-            cardTechnicianName,cardTechnicianMobile,cardTechnicianGender,cardTechnicianAddress;
+
 
     public TeamDetailsFragment() {
         // Required empty public constructor
@@ -85,14 +96,14 @@ public class TeamDetailsFragment extends Fragment {
         {
             view = inflater.inflate(R.layout.fragment_team_details_english, container, false);
 
+
         }
 
         initializations(view);
         setTechnicianData();
-
-        generateQRClickListener();
-
-        checkQRExistsOrNot();
+        generateQrImg();
+        checkQRGeneratedOrNot();
+        downloadIdCardClickListener();
 
 
         return view;
@@ -101,35 +112,19 @@ public class TeamDetailsFragment extends Fragment {
     private void initializations(View view)
     {
         resultQrImg= (ImageView)view.findViewById(R.id.qr_img);
-        resultQrBackImg = (ImageView)view.findViewById(R.id.qr_back_img);
-        generateQrBtn = (Button)view.findViewById(R.id.btn_scan_id);
-        qrRelativeLayout = (RelativeLayout) view.findViewById(R.id.scan_id_layout);
-        qrIdBackLayout = (RelativeLayout)view.findViewById(R.id.scan_id_backlayout);
-        technicianName=(TextView)view.findViewById(R.id.technician_name);
-        technicianMobile=(TextView)view.findViewById(R.id.technician_mobile);
-        technicianAddress=(TextView)view.findViewById(R.id.technician_address);
-        technicianGender=(TextView)view.findViewById(R.id.technician_gender);
-        cardTechnicianName=(TextView)view.findViewById(R.id.card_technician_name);
-        cardTechnicianMobile=(TextView)view.findViewById(R.id.card_technician_mobile);
-        cardTechnicianAddress=(TextView)view.findViewById(R.id.card_technician_address);
-        cardTechnicianGender=(TextView)view.findViewById(R.id.card_technician_gender);
-    }
-
-
-
-    private void generateQRClickListener()
-    {
-        generateQrBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                sweetAlertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE).setTitleText("Please wait");;
-                sweetAlertDialog.show();
-
-                generateQrImg();
-            }
-        });
-
+        qrIdFrontLayout = (LinearLayout) view.findViewById(R.id.scan_id_layout_new);
+        qrIdBackLayout = (LinearLayout)view.findViewById(R.id.scan_id_back_layout_new);
+        newCardFrontTechnicianName=(TextView)view.findViewById(R.id.new_card_front_technician_name);
+        newCardTechnicianMobile=(TextView)view.findViewById(R.id.new_card_technician_mobile);
+        newCardFrontTechnicianPost=(TextView)view.findViewById(R.id.new_card_front_technician_post);
+        newCardTechnicianId=(TextView)view.findViewById(R.id.new_card_technician_id);
+        newBackCardTechnicianName=(TextView)view.findViewById(R.id.new_back_card_technician_name);
+        newBackCardTechnicianPost=(TextView)view.findViewById(R.id.new_back_card_technician_post);
+        newBackCardJoiningDate=(TextView)view.findViewById(R.id.new_back_card_joining_date);
+        newBackCardExpiryDate=(TextView)view.findViewById(R.id.new_back_card_expiry_date);
+        newBackCardTechnicianId=(TextView)view.findViewById(R.id.new_back_card_technician_id);
+        newBackCardAddress=(TextView)view.findViewById(R.id.new_back_card_address);
+        btnDownload=(Button)view.findViewById(R.id.btn_download);
     }
 
     private void generateQrImg()
@@ -138,19 +133,8 @@ public class TeamDetailsFragment extends Fragment {
             bitmap = TextToImageEncode(getTeamDataInString());
 
             resultQrImg.setImageBitmap(bitmap);
-            resultQrBackImg.setImageBitmap(bitmap);
-            qrRelativeLayout.setVisibility(View.VISIBLE);
-            qrIdBackLayout.setVisibility(View.VISIBLE);
-            sweetAlertDialog.dismissWithAnimation();
+            isQRCreated = true;
 
-            FileHelper.savePNGImage(Folders.TECHNICANQRCODE,bitmap,"TECH_QR_CODE"+technician.getTech_id());
-
-          /*if(qrRelativeLayout.getVisibility()==View.VISIBLE) {
-                generateFrontBackViewID(qrRelativeLayout, "TECH_ID_FRONT_VIEW" + technician.getTech_id());
-            }
-            if(qrIdBackLayout.getVisibility()==View.VISIBLE) {
-                generateFrontBackViewID(qrIdBackLayout, "TECH_ID_BACK_VIEW" + technician.getTech_id());
-            }*/
         } catch (WriterException e) {
             e.printStackTrace();
         }
@@ -165,47 +149,6 @@ public class TeamDetailsFragment extends Fragment {
                 "\",\"mobile\":\""+technician.getMobile()+"\",\"address\":\""+ technician.getAddress()+
                 "\",\"gender\":\""+technician.getGender()+"\"}";
 
-    }
-
-    private void generateFrontBackViewID(RelativeLayout relativeLayout, String nameFrontBack)
-    {
-        //relativeLayout.setDrawingCacheEnabled(true);
-        //Bitmap bitmap = relativeLayout.getDrawingCache();
-
-
-        Bitmap bitmap = Bitmap.createBitmap(relativeLayout.getMeasuredWidth(), relativeLayout.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        relativeLayout.draw(canvas);
-        FileHelper.savePNGImage(Folders.TECHNICANQRCODE,bitmap,nameFrontBack);
-
-    }
-
-
-    private void checkQRExistsOrNot()
-    {
-        File image =   FileHelper.createfile(Folders.TECHNICANQRCODE,"TECH_QR_"+technician.getTech_id(), FileType.PNG);
-
-        if(image!=null) {
-            if (image.exists()) {
-                qrRelativeLayout.setVisibility(View.VISIBLE);
-                qrIdBackLayout.setVisibility(View.VISIBLE);
-                generateQrBtn.setVisibility(View.GONE);
-                Bitmap myBitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
-                resultQrImg.setImageBitmap(myBitmap);
-                resultQrBackImg.setImageBitmap(myBitmap);
-
-            } else {
-                qrRelativeLayout.setVisibility(View.GONE);
-                qrIdBackLayout.setVisibility(View.GONE);
-                generateQrBtn.setVisibility(View.VISIBLE);
-            }
-        }
-        else
-        {
-            qrRelativeLayout.setVisibility(View.GONE);
-            qrIdBackLayout.setVisibility(View.GONE);
-            generateQrBtn.setVisibility(View.VISIBLE);
-        }
     }
 
     Bitmap TextToImageEncode(String Value) throws WriterException
@@ -245,58 +188,173 @@ public class TeamDetailsFragment extends Fragment {
 
     private  void setTechnicianData()
     {
-        technicianName.setText(technician.getTechName());
-        technicianAddress.setText(technician.getAddress());
-        technicianMobile.setText(technician.getMobile());
+
+        newBackCardTechnicianName.setText(technician.getTechName());
         if(prefManager.getLanguage().equalsIgnoreCase(AppConstants.MARATHI)) {
-            if (technician.getGender().equalsIgnoreCase("M")) {
-                technicianGender.setText("लिंग : पुरूष");
 
-            } else {
-                technicianGender.setText("लिंग : महिला");
+            newCardFrontTechnicianName.setText("नाव: "+technician.getTechName());
+            newCardTechnicianMobile.setText("मोबाईल: "+technician.getMobile());
+            newCardFrontTechnicianPost.setText("पद: कारागीर ");
+            newBackCardTechnicianPost.setText("पद: कारागीर ");
+            newCardTechnicianId.setText("आयडी : "+technician.getTech_id());
+            newBackCardTechnicianId.setText("आयडी : "+technician.getTech_id());
+            newBackCardJoiningDate.setText("रुजू झालेली तारीख: १२ डिसेंबर २०१७");
+            newBackCardExpiryDate.setText("कालबाह्य तारीख: १२ डिसेंबर २०४२");
+            newBackCardAddress.setText("पत्ता: "+technician.getAddress());
 
-            }
 
-            if (technician.getGender().equalsIgnoreCase("M")) {
-                cardTechnicianGender.setText("लिंग : पुरूष");
-
-            } else {
-                cardTechnicianGender.setText("लिंग : महिला");
-
-            }
-            cardTechnicianName.setText("नाव: "+technician.getTechName());
-            cardTechnicianMobile.setText("मोबाईल: "+technician.getMobile());
-            cardTechnicianAddress.setText("पत्ता: "+technician.getAddress());
 
         }
         else
         {
-            if (technician.getGender().equalsIgnoreCase("M")) {
-                technicianGender.setText("Gender: Male");
+            newCardFrontTechnicianName.setText("Name: "+technician.getTechName());
+            newCardTechnicianMobile.setText("Mobile: "+technician.getMobile());
+            newCardFrontTechnicianPost.setText("Designation: Support Technician");
+            newCardTechnicianId.setText("Technician Id : "+technician.getTech_id());
+            newBackCardTechnicianId.setText("Technician Id : "+technician.getTech_id());
+            newBackCardJoiningDate.setText("Joining Date: 12 Dec 2017");
+            newBackCardExpiryDate.setText("Expiry Date: 12 Dec 2042");
+            newBackCardAddress.setText("Address: "+technician.getAddress());
 
-            } else {
-                technicianGender.setText("Gender: Female");
 
-            }
-
-
-            if(technician.getGender().equalsIgnoreCase("M")) {
-                cardTechnicianGender.setText("Gender: Male");
-
-            }
-            else
-            {
-                cardTechnicianGender.setText("Gender: Female");
-
-            }
-
-            cardTechnicianName.setText("Name: "+technician.getTechName());
-            cardTechnicianMobile.setText("Mobile: "+technician.getMobile());
-            cardTechnicianAddress.setText("Address: "+technician.getAddress());
 
         }
 
 
     }
+
+    private void checkQRGeneratedOrNot()
+    {
+       if(!isQRCreated)
+       {
+           btnDownload.setClickable(false);
+           generateQrImg();
+       }
+       else
+       {
+           btnDownload.setClickable(true);
+       }
+    }
+
+    private void downloadIdCardClickListener()
+    {
+        final File frontImg = FileHelper.createfile(Folders.TECHNICIAN_IDS,"TECHNICIAN_ID_CARD_FRONT_" + technician.getTech_id(),FileType.PNG);
+        final File backImg = FileHelper.createfile(Folders.TECHNICIAN_IDS,"TECHNICIAN_ID_CARD_BACK_" + technician.getTech_id(),FileType.PNG);
+
+
+            btnDownload.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    sweetAlertDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE).setTitleText("Please wait");;
+                    sweetAlertDialog.show();
+
+                    if(frontImg!=null && backImg!=null)
+                    {
+                        if(!frontImg.exists() && !backImg.exists())
+                        {
+                            checkQRGeneratedOrNot();
+                            saveBitMap("TECHNICIAN_ID_CARD_FRONT_" + technician.getTech_id(), qrIdFrontLayout);
+                            saveBitMap("TECHNICIAN_ID_CARD_BACK_" + technician.getTech_id(), qrIdBackLayout);
+
+                            sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                            sweetAlertDialog.setTitleText("Images Downloaded");
+                            sweetAlertDialog.setConfirmText("Ok");
+
+                            sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                    sweetAlertDialog.dismissWithAnimation();
+
+                                }
+                            });
+
+                        }
+                        else
+                        {
+                            sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                            sweetAlertDialog.setTitleText("Already Downloaded");
+                            sweetAlertDialog.setConfirmText("Ok");
+
+                            sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                @Override
+                                public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                    sweetAlertDialog.dismissWithAnimation();
+
+                                }
+                            });
+
+                        }
+                    }
+                    else
+                    {
+                        sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                        sweetAlertDialog.setTitleText("Already Downloaded");
+                        sweetAlertDialog.setConfirmText("Ok");
+
+                        sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+
+                                sweetAlertDialog.dismissWithAnimation();
+
+                            }
+                        });
+
+                    }
+
+
+                }
+            });
+
+
+    }
+
+
+
+    private File saveBitMap(String imagename , View drawView)
+    {
+        File pictureFile = FileHelper.savePNGImage(Folders.TECHNICIAN_IDS,getBitmapFromView(drawView),imagename);
+        //File pictureFile = new File(filename);
+        Bitmap bitmap =getBitmapFromView(drawView);
+        try {
+           // pictureFile.createNewFile();
+            FileOutputStream oStream = new FileOutputStream(pictureFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, oStream);
+            oStream.flush();
+            oStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.i("TAG", "There was an issue saving the image.");
+        }
+
+        return pictureFile;
+    }
+    //create bitmap from view and returns it
+    private Bitmap getBitmapFromView(View view) {
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null) {
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        }   else{
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        }
+        // draw the view on the canvas
+        view.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
+    }
+
+
+
+
 
 }
