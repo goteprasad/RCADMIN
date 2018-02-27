@@ -27,6 +27,7 @@ import com.example.admin.rcadmin.pref_manager.PrefManager;
 import com.example.admin.rcadmin.runtime_permissions.RuntimePermissions;
 import com.example.admin.rcadmin.technician_list.TechnicianListFragment;
 import com.example.admin.rcadmin.user_login.LoginActivity;
+import com.example.admin.rcadmin.utils.CloseApp;
 
 import static com.example.admin.rcadmin.constants.AppConstants.MARATHI;
 
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+        CloseApp.closeAppDialog(MainActivity.this);
+
     }
 
 
@@ -243,7 +247,7 @@ public class MainActivity extends AppCompatActivity
                     CityTableHelper.deleteCityData(this);
                     VillageTableHelper.deleteCityData(this);
 
-                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                    Intent i = new Intent(MainActivity.this, LanguageSelectionActivity.class);
                     startActivity(i);
                     finish();
                     break;
@@ -263,11 +267,21 @@ public class MainActivity extends AppCompatActivity
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         enquiryFragment =  EnquiryFragment.getInstance(type);
-        fragmentTransaction.replace(R.id.frameLayout, enquiryFragment).commit();
+        fragmentTransaction.add(R.id.frameLayout, enquiryFragment).addToBackStack(null).commit();
 
 
 
     }
+
+
+    /*private void loadFragment()
+    {
+        EnquiryFragment generalinformation = new General_Information();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.framelayout, generalinformation);
+        transaction.commit();
+    }*/
+
 
 
 }

@@ -140,7 +140,7 @@ public class CityTableHelper {
             db.execSQL("DELETE FROM " + CityTable.CITY_TABLE ); //delete all rows in titlebackground table
 
 
-            Toast.makeText(context,"City Data Deleted Successfully",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"City Data Deleted Successfully",Toast.LENGTH_SHORT).show();
 
 
             db.close();
