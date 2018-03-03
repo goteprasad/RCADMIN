@@ -70,6 +70,13 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if(prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+            setTitle(getResources().getString(R.string.new_enquiry_marathi));
+        }
+        else
+        {
+            setTitle(getResources().getString(R.string.new_enquiry_english));
+        }
         drawer= (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -87,10 +94,8 @@ public class MainActivity extends AppCompatActivity
         mobile=(TextView)navHeader.findViewById(R.id.nav_textView_mobile);
         navImageview=(ImageView)navHeader.findViewById(R.id.nav_imageview);
 
-
         appUserName.setText(prefManager.getUserName());
         mobile.setText(prefManager.getMobile());
-
 
         RuntimePermissions.checkReadExternalStoragePermission(MainActivity.this);
         RuntimePermissions.checkWriteExternalStoragePermission(MainActivity.this);
@@ -267,21 +272,24 @@ public class MainActivity extends AppCompatActivity
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         enquiryFragment =  EnquiryFragment.getInstance(type);
-        fragmentTransaction.add(R.id.frameLayout, enquiryFragment).addToBackStack(null).commit();
+        fragmentTransaction.replace(R.id.frameLayout, enquiryFragment).addToBackStack(null).commit();
 
 
 
     }
 
 
-    /*private void loadFragment()
-    {
-        EnquiryFragment generalinformation = new General_Information();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.framelayout, generalinformation);
-        transaction.commit();
-    }*/
+    @Override
+    public void onResume() {
+        super.onResume();
 
-
+        if(prefManager.getLanguage().equalsIgnoreCase(MARATHI)) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.new_enquiry_marathi));
+        }
+        else
+        {
+            getSupportActionBar().setTitle(getResources().getString(R.string.new_enquiry_english));
+        }
+    }
 
 }

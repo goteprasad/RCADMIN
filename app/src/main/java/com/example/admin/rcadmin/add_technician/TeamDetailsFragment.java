@@ -95,8 +95,6 @@ public class TeamDetailsFragment extends Fragment {
         else
         {
             view = inflater.inflate(R.layout.fragment_team_details_english, container, false);
-
-
         }
 
         initializations(view);
@@ -129,15 +127,14 @@ public class TeamDetailsFragment extends Fragment {
 
     private void generateQrImg()
     {
-        try {
-            bitmap = TextToImageEncode(getTeamDataInString());
+            try {
+                bitmap = TextToImageEncode(getTeamDataInString());
+                resultQrImg.setImageBitmap(bitmap);
+                isQRCreated = true;
 
-            resultQrImg.setImageBitmap(bitmap);
-            isQRCreated = true;
-
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
 
     }
 
@@ -258,9 +255,16 @@ public class TeamDetailsFragment extends Fragment {
                             saveBitMap("TECHNICIAN_ID_CARD_BACK_" + technician.getTech_id(), qrIdBackLayout);
 
                             sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                            sweetAlertDialog.setTitleText("Images Downloaded");
-                            sweetAlertDialog.setConfirmText("Ok");
-
+                            if(prefManager.getLanguage().equalsIgnoreCase("MARATHI"))
+                            {
+                                sweetAlertDialog.setTitleText("फोटो डाउनलोड झाले आहे");
+                                sweetAlertDialog.setConfirmText("ठीक आहे");
+                            }
+                            else
+                            {
+                                sweetAlertDialog.setTitleText("Images Downloaded");
+                                sweetAlertDialog.setConfirmText("Ok");
+                            }
                             sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -273,9 +277,18 @@ public class TeamDetailsFragment extends Fragment {
                         }
                         else
                         {
+
                             sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                            sweetAlertDialog.setTitleText("Already Downloaded");
-                            sweetAlertDialog.setConfirmText("Ok");
+                            if(prefManager.getLanguage().equalsIgnoreCase("MARATHI"))
+                            {
+                                sweetAlertDialog.setTitleText("फोटो आधीच डाउनलोड झाले आहे");
+                                sweetAlertDialog.setConfirmText("ठीक आहे");
+                            }
+                            else
+                            {
+                                sweetAlertDialog.setTitleText("Already Downloaded");
+                                sweetAlertDialog.setConfirmText("Ok");
+                            }
 
                             sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
@@ -291,8 +304,16 @@ public class TeamDetailsFragment extends Fragment {
                     else
                     {
                         sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                        sweetAlertDialog.setTitleText("Already Downloaded");
-                        sweetAlertDialog.setConfirmText("Ok");
+                        if(prefManager.getLanguage().equalsIgnoreCase("MARATHI"))
+                        {
+                            sweetAlertDialog.setTitleText("फोटो आधीच डाउनलोड झाले आहे");
+                            sweetAlertDialog.setConfirmText("ठीक आहे");
+                        }
+                        else
+                        {
+                            sweetAlertDialog.setTitleText("Already Downloaded");
+                            sweetAlertDialog.setConfirmText("Ok");
+                        }
 
                         sweetAlertDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
@@ -311,8 +332,6 @@ public class TeamDetailsFragment extends Fragment {
 
 
     }
-
-
 
     private File saveBitMap(String imagename , View drawView)
     {
