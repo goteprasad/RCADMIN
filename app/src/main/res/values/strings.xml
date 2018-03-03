@@ -68,7 +68,7 @@
     <string name="add_technician_marathi">कारागीराचा जोडा</string>
     <string name="app_username_marathi">अॅप वापरकर्त्याचे नाव</string>
     <string name="please_enter_username_marathi">कृपया युजरनेम टाका </string>
-    <string name="please_enter_password_marathi">कृपया युपासवर्ड टाका</string>
+    <string name="please_enter_password_marathi">कृपया पासवर्ड टाका</string>
     <string name="parse_error_marathi">विश्लेषण त्रुटी</string>
     <string name="unknown_error_marathi">अज्ञात त्रुटी</string>
     <string name="network_error_marathi">नेटवर्क त्रुटी</string>

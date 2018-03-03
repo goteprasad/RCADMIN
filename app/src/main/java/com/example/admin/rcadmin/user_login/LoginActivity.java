@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             edtPassword.setHintTextColor(getResources().getColor(R.color.DarkGrey));
 
             login.setText(getResources().getString(R.string.login_marathi));
-            login.setTextSize(Utility.getConvertFloatToDP(LoginActivity.this, 12));
+            login.setTextSize(Utility.getConvertFloatToDP(LoginActivity.this, 10));
 
         } else {
             text_login.setText(getResources().getString(R.string.login_english));
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
             edtPassword.setHintTextColor(getResources().getColor(R.color.DarkGrey));
 
             login.setText(getResources().getString(R.string.login_english));
-            login.setTextSize(Utility.getConvertFloatToDP(LoginActivity.this, 10));
+            login.setTextSize(Utility.getConvertFloatToDP(LoginActivity.this, 8));
 
         }
 
